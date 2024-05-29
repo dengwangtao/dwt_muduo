@@ -1,6 +1,18 @@
 [
 {
   "directory": "/dwt/project/dwt_muduo/build/src",
+  "command": "/usr/bin/g++    -g -g -std=gnu++14 -o CMakeFiles/dwt_muduo.dir/Channel.cpp.o -c /dwt/project/dwt_muduo/src/Channel.cpp",
+  "file": "/dwt/project/dwt_muduo/src/Channel.cpp",
+  "output": "src/CMakeFiles/dwt_muduo.dir/Channel.cpp.o"
+},
+{
+  "directory": "/dwt/project/dwt_muduo/build/src",
+  "command": "/usr/bin/g++    -g -g -std=gnu++14 -o CMakeFiles/dwt_muduo.dir/EventLoop.cpp.o -c /dwt/project/dwt_muduo/src/EventLoop.cpp",
+  "file": "/dwt/project/dwt_muduo/src/EventLoop.cpp",
+  "output": "src/CMakeFiles/dwt_muduo.dir/EventLoop.cpp.o"
+},
+{
+  "directory": "/dwt/project/dwt_muduo/build/src",
   "command": "/usr/bin/g++    -g -g -std=gnu++14 -o CMakeFiles/dwt_muduo.dir/InetAddress.cpp.o -c /dwt/project/dwt_muduo/src/InetAddress.cpp",
   "file": "/dwt/project/dwt_muduo/src/InetAddress.cpp",
   "output": "src/CMakeFiles/dwt_muduo.dir/InetAddress.cpp.o"
@@ -10,6 +22,12 @@
   "command": "/usr/bin/g++    -g -g -std=gnu++14 -o CMakeFiles/dwt_muduo.dir/Logger.cpp.o -c /dwt/project/dwt_muduo/src/Logger.cpp",
   "file": "/dwt/project/dwt_muduo/src/Logger.cpp",
   "output": "src/CMakeFiles/dwt_muduo.dir/Logger.cpp.o"
+},
+{
+  "directory": "/dwt/project/dwt_muduo/build/src",
+  "command": "/usr/bin/g++    -g -g -std=gnu++14 -o CMakeFiles/dwt_muduo.dir/TcpServer.cpp.o -c /dwt/project/dwt_muduo/src/TcpServer.cpp",
+  "file": "/dwt/project/dwt_muduo/src/TcpServer.cpp",
+  "output": "src/CMakeFiles/dwt_muduo.dir/TcpServer.cpp.o"
 },
 {
   "directory": "/dwt/project/dwt_muduo/build/src",

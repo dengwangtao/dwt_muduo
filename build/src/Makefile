@@ -130,6 +130,54 @@ dwt_muduo/fast:
 	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/build
 .PHONY : dwt_muduo/fast
 
+Channel.o: Channel.cpp.o
+.PHONY : Channel.o
+
+# target to build an object file
+Channel.cpp.o:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/Channel.cpp.o
+.PHONY : Channel.cpp.o
+
+Channel.i: Channel.cpp.i
+.PHONY : Channel.i
+
+# target to preprocess a source file
+Channel.cpp.i:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/Channel.cpp.i
+.PHONY : Channel.cpp.i
+
+Channel.s: Channel.cpp.s
+.PHONY : Channel.s
+
+# target to generate assembly for a file
+Channel.cpp.s:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/Channel.cpp.s
+.PHONY : Channel.cpp.s
+
+EventLoop.o: EventLoop.cpp.o
+.PHONY : EventLoop.o
+
+# target to build an object file
+EventLoop.cpp.o:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/EventLoop.cpp.o
+.PHONY : EventLoop.cpp.o
+
+EventLoop.i: EventLoop.cpp.i
+.PHONY : EventLoop.i
+
+# target to preprocess a source file
+EventLoop.cpp.i:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/EventLoop.cpp.i
+.PHONY : EventLoop.cpp.i
+
+EventLoop.s: EventLoop.cpp.s
+.PHONY : EventLoop.s
+
+# target to generate assembly for a file
+EventLoop.cpp.s:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/EventLoop.cpp.s
+.PHONY : EventLoop.cpp.s
+
 InetAddress.o: InetAddress.cpp.o
 .PHONY : InetAddress.o
 
@@ -178,6 +226,30 @@ Logger.cpp.s:
 	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/Logger.cpp.s
 .PHONY : Logger.cpp.s
 
+TcpServer.o: TcpServer.cpp.o
+.PHONY : TcpServer.o
+
+# target to build an object file
+TcpServer.cpp.o:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/TcpServer.cpp.o
+.PHONY : TcpServer.cpp.o
+
+TcpServer.i: TcpServer.cpp.i
+.PHONY : TcpServer.i
+
+# target to preprocess a source file
+TcpServer.cpp.i:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/TcpServer.cpp.i
+.PHONY : TcpServer.cpp.i
+
+TcpServer.s: TcpServer.cpp.s
+.PHONY : TcpServer.s
+
+# target to generate assembly for a file
+TcpServer.cpp.s:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/TcpServer.cpp.s
+.PHONY : TcpServer.cpp.s
+
 Timestamp.o: Timestamp.cpp.o
 .PHONY : Timestamp.o
 
@@ -211,12 +283,21 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... dwt_muduo"
+	@echo "... Channel.o"
+	@echo "... Channel.i"
+	@echo "... Channel.s"
+	@echo "... EventLoop.o"
+	@echo "... EventLoop.i"
+	@echo "... EventLoop.s"
 	@echo "... InetAddress.o"
 	@echo "... InetAddress.i"
 	@echo "... InetAddress.s"
 	@echo "... Logger.o"
 	@echo "... Logger.i"
 	@echo "... Logger.s"
+	@echo "... TcpServer.o"
+	@echo "... TcpServer.i"
+	@echo "... TcpServer.s"
 	@echo "... Timestamp.o"
 	@echo "... Timestamp.i"
 	@echo "... Timestamp.s"
