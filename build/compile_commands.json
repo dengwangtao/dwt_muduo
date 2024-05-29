@@ -1,0 +1,26 @@
+[
+{
+  "directory": "/dwt/project/dwt_muduo/build/src",
+  "command": "/usr/bin/g++    -g -g -std=gnu++14 -o CMakeFiles/dwt_muduo.dir/InetAddress.cpp.o -c /dwt/project/dwt_muduo/src/InetAddress.cpp",
+  "file": "/dwt/project/dwt_muduo/src/InetAddress.cpp",
+  "output": "src/CMakeFiles/dwt_muduo.dir/InetAddress.cpp.o"
+},
+{
+  "directory": "/dwt/project/dwt_muduo/build/src",
+  "command": "/usr/bin/g++    -g -g -std=gnu++14 -o CMakeFiles/dwt_muduo.dir/Logger.cpp.o -c /dwt/project/dwt_muduo/src/Logger.cpp",
+  "file": "/dwt/project/dwt_muduo/src/Logger.cpp",
+  "output": "src/CMakeFiles/dwt_muduo.dir/Logger.cpp.o"
+},
+{
+  "directory": "/dwt/project/dwt_muduo/build/src",
+  "command": "/usr/bin/g++    -g -g -std=gnu++14 -o CMakeFiles/dwt_muduo.dir/Timestamp.cpp.o -c /dwt/project/dwt_muduo/src/Timestamp.cpp",
+  "file": "/dwt/project/dwt_muduo/src/Timestamp.cpp",
+  "output": "src/CMakeFiles/dwt_muduo.dir/Timestamp.cpp.o"
+},
+{
+  "directory": "/dwt/project/dwt_muduo/build/test",
+  "command": "/usr/bin/g++  -I/dwt/project/dwt_muduo/src  -g -g -std=gnu++14 -o CMakeFiles/test.dir/main_test.cpp.o -c /dwt/project/dwt_muduo/test/main_test.cpp",
+  "file": "/dwt/project/dwt_muduo/test/main_test.cpp",
+  "output": "test/CMakeFiles/test.dir/main_test.cpp.o"
+}
+]
