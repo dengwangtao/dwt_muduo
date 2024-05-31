@@ -1,5 +1,5 @@
 #include "Poller.h"
-
+#include "EpollPoller.h"
 #include "stdlib.h"
 
 namespace dwt {
@@ -11,11 +11,11 @@ Poller* Poller::newDefaultPoller(EventLoop* loop) {
         // 生成poll实例
     } else {
         // 生成epoll实例
-        
-        // return EpollPoller(loop);
+        return new EpollPoller(loop);
     }
 
     return nullptr;
 }
+
 
 }

@@ -83,10 +83,52 @@ src/CMakeFiles/dwt_muduo.dir/Channel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/dwt_muduo.dir/Channel.cpp.s"
 	cd /dwt/project/dwt_muduo/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /dwt/project/dwt_muduo/src/Channel.cpp -o CMakeFiles/dwt_muduo.dir/Channel.cpp.s
 
+src/CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.o: src/CMakeFiles/dwt_muduo.dir/flags.make
+src/CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.o: /dwt/project/dwt_muduo/src/CurrentThread.cpp
+src/CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.o: src/CMakeFiles/dwt_muduo.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/dwt/project/dwt_muduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.o"
+	cd /dwt/project/dwt_muduo/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.o -MF CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.o.d -o CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.o -c /dwt/project/dwt_muduo/src/CurrentThread.cpp
+
+src/CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.i"
+	cd /dwt/project/dwt_muduo/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /dwt/project/dwt_muduo/src/CurrentThread.cpp > CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.i
+
+src/CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.s"
+	cd /dwt/project/dwt_muduo/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /dwt/project/dwt_muduo/src/CurrentThread.cpp -o CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.s
+
+src/CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.o: src/CMakeFiles/dwt_muduo.dir/flags.make
+src/CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.o: /dwt/project/dwt_muduo/src/DefaultPoller.cpp
+src/CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.o: src/CMakeFiles/dwt_muduo.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/dwt/project/dwt_muduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.o"
+	cd /dwt/project/dwt_muduo/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.o -MF CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.o.d -o CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.o -c /dwt/project/dwt_muduo/src/DefaultPoller.cpp
+
+src/CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.i"
+	cd /dwt/project/dwt_muduo/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /dwt/project/dwt_muduo/src/DefaultPoller.cpp > CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.i
+
+src/CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.s"
+	cd /dwt/project/dwt_muduo/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /dwt/project/dwt_muduo/src/DefaultPoller.cpp -o CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.s
+
+src/CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.o: src/CMakeFiles/dwt_muduo.dir/flags.make
+src/CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.o: /dwt/project/dwt_muduo/src/EpollPoller.cpp
+src/CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.o: src/CMakeFiles/dwt_muduo.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/dwt/project/dwt_muduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.o"
+	cd /dwt/project/dwt_muduo/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.o -MF CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.o.d -o CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.o -c /dwt/project/dwt_muduo/src/EpollPoller.cpp
+
+src/CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.i"
+	cd /dwt/project/dwt_muduo/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /dwt/project/dwt_muduo/src/EpollPoller.cpp > CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.i
+
+src/CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.s"
+	cd /dwt/project/dwt_muduo/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /dwt/project/dwt_muduo/src/EpollPoller.cpp -o CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.s
+
 src/CMakeFiles/dwt_muduo.dir/EventLoop.cpp.o: src/CMakeFiles/dwt_muduo.dir/flags.make
 src/CMakeFiles/dwt_muduo.dir/EventLoop.cpp.o: /dwt/project/dwt_muduo/src/EventLoop.cpp
 src/CMakeFiles/dwt_muduo.dir/EventLoop.cpp.o: src/CMakeFiles/dwt_muduo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/dwt/project/dwt_muduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/dwt_muduo.dir/EventLoop.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/dwt/project/dwt_muduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/CMakeFiles/dwt_muduo.dir/EventLoop.cpp.o"
 	cd /dwt/project/dwt_muduo/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/dwt_muduo.dir/EventLoop.cpp.o -MF CMakeFiles/dwt_muduo.dir/EventLoop.cpp.o.d -o CMakeFiles/dwt_muduo.dir/EventLoop.cpp.o -c /dwt/project/dwt_muduo/src/EventLoop.cpp
 
 src/CMakeFiles/dwt_muduo.dir/EventLoop.cpp.i: cmake_force
@@ -100,7 +142,7 @@ src/CMakeFiles/dwt_muduo.dir/EventLoop.cpp.s: cmake_force
 src/CMakeFiles/dwt_muduo.dir/InetAddress.cpp.o: src/CMakeFiles/dwt_muduo.dir/flags.make
 src/CMakeFiles/dwt_muduo.dir/InetAddress.cpp.o: /dwt/project/dwt_muduo/src/InetAddress.cpp
 src/CMakeFiles/dwt_muduo.dir/InetAddress.cpp.o: src/CMakeFiles/dwt_muduo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/dwt/project/dwt_muduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/CMakeFiles/dwt_muduo.dir/InetAddress.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/dwt/project/dwt_muduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/CMakeFiles/dwt_muduo.dir/InetAddress.cpp.o"
 	cd /dwt/project/dwt_muduo/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/dwt_muduo.dir/InetAddress.cpp.o -MF CMakeFiles/dwt_muduo.dir/InetAddress.cpp.o.d -o CMakeFiles/dwt_muduo.dir/InetAddress.cpp.o -c /dwt/project/dwt_muduo/src/InetAddress.cpp
 
 src/CMakeFiles/dwt_muduo.dir/InetAddress.cpp.i: cmake_force
@@ -114,7 +156,7 @@ src/CMakeFiles/dwt_muduo.dir/InetAddress.cpp.s: cmake_force
 src/CMakeFiles/dwt_muduo.dir/Logger.cpp.o: src/CMakeFiles/dwt_muduo.dir/flags.make
 src/CMakeFiles/dwt_muduo.dir/Logger.cpp.o: /dwt/project/dwt_muduo/src/Logger.cpp
 src/CMakeFiles/dwt_muduo.dir/Logger.cpp.o: src/CMakeFiles/dwt_muduo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/dwt/project/dwt_muduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/CMakeFiles/dwt_muduo.dir/Logger.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/dwt/project/dwt_muduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object src/CMakeFiles/dwt_muduo.dir/Logger.cpp.o"
 	cd /dwt/project/dwt_muduo/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/dwt_muduo.dir/Logger.cpp.o -MF CMakeFiles/dwt_muduo.dir/Logger.cpp.o.d -o CMakeFiles/dwt_muduo.dir/Logger.cpp.o -c /dwt/project/dwt_muduo/src/Logger.cpp
 
 src/CMakeFiles/dwt_muduo.dir/Logger.cpp.i: cmake_force
@@ -128,7 +170,7 @@ src/CMakeFiles/dwt_muduo.dir/Logger.cpp.s: cmake_force
 src/CMakeFiles/dwt_muduo.dir/Poller.cpp.o: src/CMakeFiles/dwt_muduo.dir/flags.make
 src/CMakeFiles/dwt_muduo.dir/Poller.cpp.o: /dwt/project/dwt_muduo/src/Poller.cpp
 src/CMakeFiles/dwt_muduo.dir/Poller.cpp.o: src/CMakeFiles/dwt_muduo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/dwt/project/dwt_muduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/CMakeFiles/dwt_muduo.dir/Poller.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/dwt/project/dwt_muduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object src/CMakeFiles/dwt_muduo.dir/Poller.cpp.o"
 	cd /dwt/project/dwt_muduo/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/dwt_muduo.dir/Poller.cpp.o -MF CMakeFiles/dwt_muduo.dir/Poller.cpp.o.d -o CMakeFiles/dwt_muduo.dir/Poller.cpp.o -c /dwt/project/dwt_muduo/src/Poller.cpp
 
 src/CMakeFiles/dwt_muduo.dir/Poller.cpp.i: cmake_force
@@ -142,7 +184,7 @@ src/CMakeFiles/dwt_muduo.dir/Poller.cpp.s: cmake_force
 src/CMakeFiles/dwt_muduo.dir/TcpServer.cpp.o: src/CMakeFiles/dwt_muduo.dir/flags.make
 src/CMakeFiles/dwt_muduo.dir/TcpServer.cpp.o: /dwt/project/dwt_muduo/src/TcpServer.cpp
 src/CMakeFiles/dwt_muduo.dir/TcpServer.cpp.o: src/CMakeFiles/dwt_muduo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/dwt/project/dwt_muduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/CMakeFiles/dwt_muduo.dir/TcpServer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/dwt/project/dwt_muduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object src/CMakeFiles/dwt_muduo.dir/TcpServer.cpp.o"
 	cd /dwt/project/dwt_muduo/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/dwt_muduo.dir/TcpServer.cpp.o -MF CMakeFiles/dwt_muduo.dir/TcpServer.cpp.o.d -o CMakeFiles/dwt_muduo.dir/TcpServer.cpp.o -c /dwt/project/dwt_muduo/src/TcpServer.cpp
 
 src/CMakeFiles/dwt_muduo.dir/TcpServer.cpp.i: cmake_force
@@ -156,7 +198,7 @@ src/CMakeFiles/dwt_muduo.dir/TcpServer.cpp.s: cmake_force
 src/CMakeFiles/dwt_muduo.dir/Timestamp.cpp.o: src/CMakeFiles/dwt_muduo.dir/flags.make
 src/CMakeFiles/dwt_muduo.dir/Timestamp.cpp.o: /dwt/project/dwt_muduo/src/Timestamp.cpp
 src/CMakeFiles/dwt_muduo.dir/Timestamp.cpp.o: src/CMakeFiles/dwt_muduo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/dwt/project/dwt_muduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object src/CMakeFiles/dwt_muduo.dir/Timestamp.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/dwt/project/dwt_muduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object src/CMakeFiles/dwt_muduo.dir/Timestamp.cpp.o"
 	cd /dwt/project/dwt_muduo/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/dwt_muduo.dir/Timestamp.cpp.o -MF CMakeFiles/dwt_muduo.dir/Timestamp.cpp.o.d -o CMakeFiles/dwt_muduo.dir/Timestamp.cpp.o -c /dwt/project/dwt_muduo/src/Timestamp.cpp
 
 src/CMakeFiles/dwt_muduo.dir/Timestamp.cpp.i: cmake_force
@@ -170,6 +212,9 @@ src/CMakeFiles/dwt_muduo.dir/Timestamp.cpp.s: cmake_force
 # Object files for target dwt_muduo
 dwt_muduo_OBJECTS = \
 "CMakeFiles/dwt_muduo.dir/Channel.cpp.o" \
+"CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.o" \
+"CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.o" \
+"CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.o" \
 "CMakeFiles/dwt_muduo.dir/EventLoop.cpp.o" \
 "CMakeFiles/dwt_muduo.dir/InetAddress.cpp.o" \
 "CMakeFiles/dwt_muduo.dir/Logger.cpp.o" \
@@ -181,6 +226,9 @@ dwt_muduo_OBJECTS = \
 dwt_muduo_EXTERNAL_OBJECTS =
 
 /dwt/project/dwt_muduo/lib/libdwt_muduo.a: src/CMakeFiles/dwt_muduo.dir/Channel.cpp.o
+/dwt/project/dwt_muduo/lib/libdwt_muduo.a: src/CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.o
+/dwt/project/dwt_muduo/lib/libdwt_muduo.a: src/CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.o
+/dwt/project/dwt_muduo/lib/libdwt_muduo.a: src/CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.o
 /dwt/project/dwt_muduo/lib/libdwt_muduo.a: src/CMakeFiles/dwt_muduo.dir/EventLoop.cpp.o
 /dwt/project/dwt_muduo/lib/libdwt_muduo.a: src/CMakeFiles/dwt_muduo.dir/InetAddress.cpp.o
 /dwt/project/dwt_muduo/lib/libdwt_muduo.a: src/CMakeFiles/dwt_muduo.dir/Logger.cpp.o
@@ -189,7 +237,7 @@ dwt_muduo_EXTERNAL_OBJECTS =
 /dwt/project/dwt_muduo/lib/libdwt_muduo.a: src/CMakeFiles/dwt_muduo.dir/Timestamp.cpp.o
 /dwt/project/dwt_muduo/lib/libdwt_muduo.a: src/CMakeFiles/dwt_muduo.dir/build.make
 /dwt/project/dwt_muduo/lib/libdwt_muduo.a: src/CMakeFiles/dwt_muduo.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/dwt/project/dwt_muduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX static library /dwt/project/dwt_muduo/lib/libdwt_muduo.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/dwt/project/dwt_muduo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX static library /dwt/project/dwt_muduo/lib/libdwt_muduo.a"
 	cd /dwt/project/dwt_muduo/build/src && $(CMAKE_COMMAND) -P CMakeFiles/dwt_muduo.dir/cmake_clean_target.cmake
 	cd /dwt/project/dwt_muduo/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/dwt_muduo.dir/link.txt --verbose=$(VERBOSE)
 
