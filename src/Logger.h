@@ -41,8 +41,8 @@ private:
 
     #define LOG_DEBUG(logMsgFormat, ...)                    \
     do {                                                    \
-        dwt::Logger& logger = dwt::Logger::getInstance();             \
-        logger.setLogLevel(dwt::LogLevel::DEBUG);                \
+        dwt::Logger& logger = dwt::Logger::getInstance();   \
+        logger.setLogLevel(dwt::LogLevel::DEBUG);           \
         char buf[1024] = {0};                               \
         snprintf(buf, 1024, logMsgFormat, ##__VA_ARGS__);   \
         logger.log(buf);                                    \
@@ -55,19 +55,19 @@ private:
 
 
 
-#define LOG_INFO(logMsgFormat, ...)                    \
+#define LOG_INFO(logMsgFormat, ...)                     \
 do {                                                    \
-    dwt::Logger& logger = dwt::Logger::getInstance();             \
-    logger.setLogLevel(dwt::LogLevel::INFO);                \
+    dwt::Logger& logger = dwt::Logger::getInstance();   \
+    logger.setLogLevel(dwt::LogLevel::INFO);            \
     char buf[1024] = {0};                               \
     snprintf(buf, 1024, logMsgFormat, ##__VA_ARGS__);   \
     logger.log(buf);                                    \
 } while(0);
 
-#define LOG_WARN(logMsgFormat, ...)                    \
+#define LOG_WARN(logMsgFormat, ...)                     \
 do {                                                    \
-    dwt::Logger& logger = dwt::Logger::getInstance();             \
-    logger.setLogLevel(dwt::LogLevel::WARN);                \
+    dwt::Logger& logger = dwt::Logger::getInstance();   \
+    logger.setLogLevel(dwt::LogLevel::WARN);            \
     char buf[1024] = {0};                               \
     snprintf(buf, 1024, logMsgFormat, ##__VA_ARGS__);   \
     logger.log(buf);                                    \
@@ -75,8 +75,8 @@ do {                                                    \
 
 #define LOG_ERROR(logMsgFormat, ...)                    \
 do {                                                    \
-    dwt::Logger& logger = dwt::Logger::getInstance();             \
-    logger.setLogLevel(dwt::LogLevel::ERROR);                \
+    dwt::Logger& logger = dwt::Logger::getInstance();   \
+    logger.setLogLevel(dwt::LogLevel::ERROR);           \
     char buf[1024] = {0};                               \
     snprintf(buf, 1024, logMsgFormat, ##__VA_ARGS__);   \
     logger.log(buf);                                    \
@@ -84,11 +84,12 @@ do {                                                    \
 
 #define LOG_FATAL(logMsgFormat, ...)                    \
 do {                                                    \
-    dwt::Logger& logger = dwt::Logger::getInstance();             \
-    logger.setLogLevel(dwt::LogLevel::FATAL);                \
+    dwt::Logger& logger = dwt::Logger::getInstance();   \
+    logger.setLogLevel(dwt::LogLevel::FATAL);           \
     char buf[1024] = {0};                               \
     snprintf(buf, 1024, logMsgFormat, ##__VA_ARGS__);   \
     logger.log(buf);                                    \
+    exit(-1);                                           \
 } while(0);
 
 

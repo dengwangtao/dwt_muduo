@@ -116,12 +116,14 @@ EventLoop* Channel::ownerLoop() {
 void Channel::remove() {
     // TODO: 通过EventLoop删除Channel
     // m_loop->removeChannel(this);
+    m_loop->removeChannel(this);
 }
 
 
 void Channel::update() {
     // TODO: 通过EventLoop更新Channel状态
     // m_loop->updateChannel(this);
+    m_loop->updateChannel(this);
 }
 
 void Channel::handelEventWithGuard(Timestamp reveiveTime) {

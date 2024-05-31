@@ -226,6 +226,30 @@ Logger.cpp.s:
 	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/Logger.cpp.s
 .PHONY : Logger.cpp.s
 
+Poller.o: Poller.cpp.o
+.PHONY : Poller.o
+
+# target to build an object file
+Poller.cpp.o:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/Poller.cpp.o
+.PHONY : Poller.cpp.o
+
+Poller.i: Poller.cpp.i
+.PHONY : Poller.i
+
+# target to preprocess a source file
+Poller.cpp.i:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/Poller.cpp.i
+.PHONY : Poller.cpp.i
+
+Poller.s: Poller.cpp.s
+.PHONY : Poller.s
+
+# target to generate assembly for a file
+Poller.cpp.s:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/Poller.cpp.s
+.PHONY : Poller.cpp.s
+
 TcpServer.o: TcpServer.cpp.o
 .PHONY : TcpServer.o
 
@@ -295,6 +319,9 @@ help:
 	@echo "... Logger.o"
 	@echo "... Logger.i"
 	@echo "... Logger.s"
+	@echo "... Poller.o"
+	@echo "... Poller.i"
+	@echo "... Poller.s"
 	@echo "... TcpServer.o"
 	@echo "... TcpServer.i"
 	@echo "... TcpServer.s"
