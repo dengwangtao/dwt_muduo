@@ -154,6 +154,78 @@ Channel.cpp.s:
 	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/Channel.cpp.s
 .PHONY : Channel.cpp.s
 
+CurrentThread.o: CurrentThread.cpp.o
+.PHONY : CurrentThread.o
+
+# target to build an object file
+CurrentThread.cpp.o:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.o
+.PHONY : CurrentThread.cpp.o
+
+CurrentThread.i: CurrentThread.cpp.i
+.PHONY : CurrentThread.i
+
+# target to preprocess a source file
+CurrentThread.cpp.i:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.i
+.PHONY : CurrentThread.cpp.i
+
+CurrentThread.s: CurrentThread.cpp.s
+.PHONY : CurrentThread.s
+
+# target to generate assembly for a file
+CurrentThread.cpp.s:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.s
+.PHONY : CurrentThread.cpp.s
+
+DefaultPoller.o: DefaultPoller.cpp.o
+.PHONY : DefaultPoller.o
+
+# target to build an object file
+DefaultPoller.cpp.o:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.o
+.PHONY : DefaultPoller.cpp.o
+
+DefaultPoller.i: DefaultPoller.cpp.i
+.PHONY : DefaultPoller.i
+
+# target to preprocess a source file
+DefaultPoller.cpp.i:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.i
+.PHONY : DefaultPoller.cpp.i
+
+DefaultPoller.s: DefaultPoller.cpp.s
+.PHONY : DefaultPoller.s
+
+# target to generate assembly for a file
+DefaultPoller.cpp.s:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.s
+.PHONY : DefaultPoller.cpp.s
+
+EpollPoller.o: EpollPoller.cpp.o
+.PHONY : EpollPoller.o
+
+# target to build an object file
+EpollPoller.cpp.o:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.o
+.PHONY : EpollPoller.cpp.o
+
+EpollPoller.i: EpollPoller.cpp.i
+.PHONY : EpollPoller.i
+
+# target to preprocess a source file
+EpollPoller.cpp.i:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.i
+.PHONY : EpollPoller.cpp.i
+
+EpollPoller.s: EpollPoller.cpp.s
+.PHONY : EpollPoller.s
+
+# target to generate assembly for a file
+EpollPoller.cpp.s:
+	cd /dwt/project/dwt_muduo/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/dwt_muduo.dir/build.make src/CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.s
+.PHONY : EpollPoller.cpp.s
+
 EventLoop.o: EventLoop.cpp.o
 .PHONY : EventLoop.o
 
@@ -310,6 +382,15 @@ help:
 	@echo "... Channel.o"
 	@echo "... Channel.i"
 	@echo "... Channel.s"
+	@echo "... CurrentThread.o"
+	@echo "... CurrentThread.i"
+	@echo "... CurrentThread.s"
+	@echo "... DefaultPoller.o"
+	@echo "... DefaultPoller.i"
+	@echo "... DefaultPoller.s"
+	@echo "... EpollPoller.o"
+	@echo "... EpollPoller.i"
+	@echo "... EpollPoller.s"
 	@echo "... EventLoop.o"
 	@echo "... EventLoop.i"
 	@echo "... EventLoop.s"

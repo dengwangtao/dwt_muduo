@@ -56,7 +56,10 @@
 				3,
 				4,
 				5,
-				6
+				6,
+				7,
+				8,
+				9
 			]
 		}
 	],
@@ -80,7 +83,10 @@
 				3,
 				4,
 				5,
-				6
+				6,
+				7,
+				8,
+				9
 			]
 		}
 	],
@@ -90,6 +96,24 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/Channel.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/CurrentThread.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/DefaultPoller.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/EpollPoller.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

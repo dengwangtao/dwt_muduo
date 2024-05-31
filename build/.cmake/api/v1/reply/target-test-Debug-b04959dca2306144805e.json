@@ -98,6 +98,11 @@
 				"backtrace" : 2,
 				"fragment" : "/dwt/project/dwt_muduo/lib/libdwt_muduo.a",
 				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "-lpthread",
+				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"

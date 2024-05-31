@@ -1,1 +1,1 @@
-/usr/bin/g++  -g -g CMakeFiles/test.dir/main_test.cpp.o -o /dwt/project/dwt_muduo/bin/test  /dwt/project/dwt_muduo/lib/libdwt_muduo.a
+/usr/bin/g++  -g -g CMakeFiles/test.dir/main_test.cpp.o -o /dwt/project/dwt_muduo/bin/test  /dwt/project/dwt_muduo/lib/libdwt_muduo.a -lpthread

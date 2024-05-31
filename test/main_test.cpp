@@ -8,6 +8,9 @@
 
 #include "InetAddress.h"
 
+#include "Poller.h"
+#include "EventLoop.h"
+
 /**
  * 日志测试
 */
@@ -44,6 +47,15 @@ void InetAddress_test() {
 
 
 
+void Poller_test() {
+
+    dwt::EventLoop loop;
+
+    dwt::Poller::newDefaultPoller(&loop);
+
+}
+
+
 
 int main() {
 
@@ -51,6 +63,7 @@ int main() {
 
     // InetAddress_test();
 
+    Poller_test();
     
     return 0;
 }

@@ -7,6 +7,24 @@
 },
 {
   "directory": "/dwt/project/dwt_muduo/build/src",
+  "command": "/usr/bin/g++    -g -g -std=gnu++14 -o CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.o -c /dwt/project/dwt_muduo/src/CurrentThread.cpp",
+  "file": "/dwt/project/dwt_muduo/src/CurrentThread.cpp",
+  "output": "src/CMakeFiles/dwt_muduo.dir/CurrentThread.cpp.o"
+},
+{
+  "directory": "/dwt/project/dwt_muduo/build/src",
+  "command": "/usr/bin/g++    -g -g -std=gnu++14 -o CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.o -c /dwt/project/dwt_muduo/src/DefaultPoller.cpp",
+  "file": "/dwt/project/dwt_muduo/src/DefaultPoller.cpp",
+  "output": "src/CMakeFiles/dwt_muduo.dir/DefaultPoller.cpp.o"
+},
+{
+  "directory": "/dwt/project/dwt_muduo/build/src",
+  "command": "/usr/bin/g++    -g -g -std=gnu++14 -o CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.o -c /dwt/project/dwt_muduo/src/EpollPoller.cpp",
+  "file": "/dwt/project/dwt_muduo/src/EpollPoller.cpp",
+  "output": "src/CMakeFiles/dwt_muduo.dir/EpollPoller.cpp.o"
+},
+{
+  "directory": "/dwt/project/dwt_muduo/build/src",
   "command": "/usr/bin/g++    -g -g -std=gnu++14 -o CMakeFiles/dwt_muduo.dir/EventLoop.cpp.o -c /dwt/project/dwt_muduo/src/EventLoop.cpp",
   "file": "/dwt/project/dwt_muduo/src/EventLoop.cpp",
   "output": "src/CMakeFiles/dwt_muduo.dir/EventLoop.cpp.o"
