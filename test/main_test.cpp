@@ -32,13 +32,18 @@ void Logger_test() {
     LOG_FATAL("%d %s %s", 1024, "dwt", "这是fatal日志");
 }
 
-
+/**
+ * InetAddress 测试
+*/
 void InetAddress_test() {
     dwt::InetAddress addr("127.0.0.1", 8888);
 
     LOG_DEBUG("IP: %s Port: %d", addr.toIp().c_str(), addr.toPort());
     LOG_DEBUG("IP_Port: %s", addr.toIpPort().c_str());
 }
+
+
+
 
 int main() {
 

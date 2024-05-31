@@ -1,0 +1,32 @@
+#pragma once
+
+#include <unistd.h>
+#include <sys/syscall.h>
+#include "noncopyable.h"
+
+namespace dwt{
+
+namespace CurrentThread {
+
+
+// 线程内全局变量
+extern __thread int t_cacheTid;
+
+
+void cachedTid();
+
+
+
+inline int tid() {
+    if(__builtin_expect(t_cacheTid == 0, 0)) { // 分支预测, cachedTid()执行的可能性小
+        cachedTid();
+    }
+    return t_cacheTid;
+}
+
+
+
+} // end CurrentThread dwt
+
+
+} // end namespace dwt

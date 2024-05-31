@@ -25,6 +25,12 @@
 },
 {
   "directory": "/dwt/project/dwt_muduo/build/src",
+  "command": "/usr/bin/g++    -g -g -std=gnu++14 -o CMakeFiles/dwt_muduo.dir/Poller.cpp.o -c /dwt/project/dwt_muduo/src/Poller.cpp",
+  "file": "/dwt/project/dwt_muduo/src/Poller.cpp",
+  "output": "src/CMakeFiles/dwt_muduo.dir/Poller.cpp.o"
+},
+{
+  "directory": "/dwt/project/dwt_muduo/build/src",
   "command": "/usr/bin/g++    -g -g -std=gnu++14 -o CMakeFiles/dwt_muduo.dir/TcpServer.cpp.o -c /dwt/project/dwt_muduo/src/TcpServer.cpp",
   "file": "/dwt/project/dwt_muduo/src/TcpServer.cpp",
   "output": "src/CMakeFiles/dwt_muduo.dir/TcpServer.cpp.o"
