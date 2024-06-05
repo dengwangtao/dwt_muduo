@@ -29,23 +29,23 @@ EpollPoller::~EpollPoller() {
 
 Timestamp EpollPoller::poll(int timeOutMs, ChannelList* activeChannels) {
 
-    LOG_DEBUG("function=%s | fd total count=%d", __FUNCTION__, m_channels.size());
+    LOG_DEBUG("function=EpollPoller::poll | fd total count=%d", m_channels.size());
 
     int numEvents = ::epoll_wait(m_epfd, &m_events[0], static_cast<int>(m_events.size()), timeOutMs);
     int saveErrno = errno;
     Timestamp now = Timestamp::now();
 
     if(numEvents > 0) {
-        LOG_DEBUG("function=%s | %d event happend", __FUNCTION__, numEvents);
+        LOG_DEBUG("function=EpollPoller::poll | %d event happend", numEvents);
         fillActiveChannels(numEvents, activeChannels);
 
         if(static_cast<size_t>(numEvents) == m_events.size()) {
             m_events.resize(m_events.size() * 2);
         }
     } else if(numEvents == 0) {
-        LOG_DEBUG("function=%s | no event happend", __FUNCTION__, numEvents);
+        LOG_DEBUG("function=EpollPoller::poll | no event happend", numEvents);
     } else {
-        if(saveErrno != EINTR) { // 不是 被系统调用打断
+        if(saveErrno != EINTR) { // 不是被系统调用打断
             errno = saveErrno;
             LOG_ERROR("EpollPoller::poll() error");
         }
@@ -57,7 +57,7 @@ void EpollPoller::updateChannel(Channel* channel) {
     const int index = channel->index();
     int fd = channel->fd();
 
-    LOG_INFO("function=%s | fd=%d index=%d", __FUNCTION__ , fd, channel->index());
+    LOG_INFO("function=EpollPoller::updateChannel | fd=%d index=%d" , fd, channel->index());
 
     if(index == kNew || index == kDeleted) {
 
@@ -84,7 +84,7 @@ void EpollPoller::removeChannel(Channel* channel) {
     int fd = channel->fd();
     int index = channel->index();
 
-    LOG_INFO("function=%s | fd=%d", __FUNCTION__ , fd);
+    LOG_INFO("function=EpollPoller::removeChannel | fd=%d" , fd);
 
     size_t n = m_channels.erase(fd);
 
