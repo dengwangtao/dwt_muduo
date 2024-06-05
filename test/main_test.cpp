@@ -15,6 +15,8 @@
 
 #include "Socket.h"
 
+#include "Acceptor.h"
+
 /**
  * 日志测试
 */
@@ -103,6 +105,18 @@ void Socket_test() {
     std::cout << remote.toIpPort() << std::endl;
 }
 
+void Acceptor_test() {
+    dwt::EventLoop loop;
+
+    dwt::Acceptor acceptor(&loop, dwt::InetAddress("127.0.0.1", 8888), true);
+
+    acceptor.setNewConnectionCallback([](int fd, const dwt::InetAddress& addr) {
+        std::cout << "new connection: " << fd << " " << addr.toIpPort() << std::endl;
+    });
+
+    acceptor.listen();
+}
+
 
 int main() {
 
@@ -118,7 +132,9 @@ int main() {
 
     // EventLoopThreadPool_test();
 
-    Socket_test();
+    // Socket_test();
+
+    Acceptor_test();
     
     return 0;
 }
