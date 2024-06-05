@@ -3,6 +3,11 @@
 
 namespace dwt{
 
+
+InetAddress::InetAddress() {
+    memset(&m_addr, 0, sizeof(m_addr));
+}
+
 InetAddress::InetAddress(const std::string& IP, uint16_t port) {
     memset(&m_addr, 0, sizeof(m_addr));
 

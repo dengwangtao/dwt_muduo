@@ -10,6 +10,10 @@
 
 #include "Poller.h"
 #include "EventLoop.h"
+#include "EventLoopThreadPool.h"
+#include "Thread.h"
+
+#include "Socket.h"
 
 /**
  * 日志测试
@@ -60,6 +64,45 @@ void EventLoop_test() {
 }
 
 
+void Thread_test() {
+    dwt::Thread t([]() {
+        for(int i = 0; i < 1000; ++ i) {
+            std::cout << i << " ";
+        }
+        std::cout << std::endl;
+    }, "ttt");
+
+    t.start();
+    // t.join();
+}
+
+void EventLoopThreadPool_test() {
+    dwt::EventLoop loop;
+    dwt::EventLoopThreadPool pool(&loop, "dwt_");
+    pool.setThreadNum(2);
+    pool.start();
+
+    loop.loop();
+}
+
+void Socket_test() {
+    
+    int fd = ::socket(AF_INET, SOCK_STREAM, 0);
+
+    dwt::Socket skt(fd);
+
+    skt.bindAddress(dwt::InetAddress("127.0.0.1", 8888));
+
+    skt.listen();
+
+    dwt::InetAddress remote;
+
+    skt.accept(&remote);
+
+
+    std::cout << remote.toIpPort() << std::endl;
+}
+
 
 int main() {
 
@@ -69,7 +112,13 @@ int main() {
 
     // Poller_test();
 
-    EventLoop_test();
+    // EventLoop_test();
+
+    // Thread_test();
+
+    // EventLoopThreadPool_test();
+
+    Socket_test();
     
     return 0;
 }
