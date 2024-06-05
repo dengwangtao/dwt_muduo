@@ -75,11 +75,11 @@ private:
     std::unique_ptr<Channel> m_wakeupChannel;
 
     ChannelList m_activeChannels;
-    Channel* m_currentActiveChannel;
+    // Channel* m_currentActiveChannel;
 
     std::atomic<bool> m_callingPendingFunctors; //标识当前loop是否有需要执行的回调操作
     std::vector<Functor> m_pendingFunctors; // 所有的回调操作
-    std::mutex m_mutex; // 保证m_pendingFunctors线程安全
+    std::mutex m_mutex;                     // 保证m_pendingFunctors线程安全
 };
 
 

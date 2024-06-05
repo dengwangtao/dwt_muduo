@@ -28,7 +28,7 @@ public:
     void setCloseCallback(EventCallback cb);
     void setErrorCallback(EventCallback cb);
 
-    // 防止当channel被手动remove调, channel还在执行回调操作
+    // 防止当channel被手动remove, channel还在执行回调操作
     void tie(const std::shared_ptr<void>& obj);
 
     int fd() const;

@@ -55,6 +55,10 @@ void Poller_test() {
 
 }
 
+void EventLoop_test() {
+    dwt::EventLoop loop;
+}
+
 
 
 int main() {
@@ -63,7 +67,9 @@ int main() {
 
     // InetAddress_test();
 
-    Poller_test();
+    // Poller_test();
+
+    EventLoop_test();
     
     return 0;
 }
