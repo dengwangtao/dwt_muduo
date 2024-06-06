@@ -19,5 +19,10 @@
 
 1. 编译静态库没问题, 编译main_test对Socket测试时报错:
    ![image-20240605180800262](C:\docker_v\dev_01\project\dwt_muduo\README.assets\image-20240605180800262.png)
-   vscode 的CMake插件没反应过来, 对顶层CMakeLists.txt保存一下, 重新构建项目即可
+   原因: vscode 的CMake插件没反应过来, 对顶层CMakeLists.txt保存一下, 重新构建项目即可
    ![image-20240605181158978](C:\docker_v\dev_01\project\dwt_muduo\README.assets\image-20240605181158978.png)
+
+2. ::accept 调用返回, errno=22
+
+   > 原因: len没有赋值
+   > 改正: socklen_t len = static_cast<socklen_t>(sizeof addr);

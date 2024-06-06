@@ -13,7 +13,10 @@ class EventLoop;
 class InetAddress;
 
 
-
+/**
+ * Acceptor: 传入baseLoop
+ * 构造时 创建一个监听的文件描述符listenfd, 和对应的Channel
+ */
 class Acceptor : noncopyable {
 
 public:

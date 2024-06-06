@@ -15,6 +15,9 @@ __thread EventLoop* t_loopInThisThread = nullptr;
 
 const int kPollTimeMs = 10000; // 默认为10秒
 
+/**
+ * 创建一个非阻塞的eventfd
+ */
 int createEventFd() {
     int evfd = ::eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC);
     if(evfd < 0)  {

@@ -1,21 +1,11 @@
+#define DWT_DEBUG
+
+#include "TcpServer.h"
+
 #include <iostream>
 #include <thread>
 #include <chrono>
 #include <string>
-
-#define DWT_DEBUG
-#include "Logger.h"
-
-#include "InetAddress.h"
-
-#include "Poller.h"
-#include "EventLoop.h"
-#include "EventLoopThreadPool.h"
-#include "Thread.h"
-
-#include "Socket.h"
-
-#include "Acceptor.h"
 
 /**
  * 日志测试
@@ -118,6 +108,35 @@ void Acceptor_test() {
 }
 
 
+/**
+ * 回声服务器
+ */
+void TcpServer_test() {
+    dwt::EventLoop loop;
+    dwt::InetAddress addr("127.0.0.1", 8080);
+    dwt::TcpServer server(&loop, addr, "test");
+
+
+    server.setConnectionCallback([](const dwt::TcpConnectionPtr& conn) {
+        std::cout << "new Connection\n";
+        if(!conn->connected()) {
+            conn->shutdown();
+        }
+    });
+
+    // echo
+    server.setMessageCallback([](const dwt::TcpConnectionPtr& conn, dwt::Buffer* buf, dwt::Timestamp time) {
+        std::string data = buf->retrieveAllAsString();
+        std::cout << "[DWT]\t receive:<<<" << data << ">>>" << std::endl;
+        conn->send(data);
+    });
+
+    // server.setThreadNum(2);
+
+    server.start();
+    loop.loop();
+}
+
 int main() {
 
     // Logger_test();
@@ -134,7 +153,9 @@ int main() {
 
     // Socket_test();
 
-    Acceptor_test();
+    // Acceptor_test();
+
+    TcpServer_test();
     
     return 0;
 }
