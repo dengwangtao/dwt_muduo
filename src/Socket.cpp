@@ -38,11 +38,11 @@ void Socket::listen() {
 */
 int Socket::accept(InetAddress* peerAddr) {
 
-    struct sockaddr_in addr;
+    sockaddr_in addr;
     memset(&addr, 0, sizeof addr);
-    socklen_t len;
+    socklen_t len = static_cast<socklen_t>(sizeof addr);
 
-    int connfd = ::accept(m_socketFd, reinterpret_cast<struct sockaddr*>(&addr), &len);
+    int connfd = ::accept(m_socketFd, (sockaddr*)&addr, &len);
 
     if(connfd >= 0) {
         peerAddr->setSockAddr(addr);
