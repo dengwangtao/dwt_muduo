@@ -131,7 +131,7 @@ void TcpServer_test() {
         conn->send(data);
     });
 
-    // server.setThreadNum(2);
+    server.setThreadNum(4);
 
     server.start();
     loop.loop();

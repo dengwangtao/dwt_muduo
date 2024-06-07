@@ -28,13 +28,13 @@ int createEventFd() {
 
 
 EventLoop::EventLoop()
-    :m_looping(false),
-    m_quit(false),
-    m_callingPendingFunctors(false),
-    m_threadId(CurrentThread::tid()),
-    m_poller(Poller::newDefaultPoller(this)),
-    m_wakeupFd(createEventFd()),
-    m_wakeupChannel(new Channel(this, m_wakeupFd)) {
+    : m_looping(false)
+    , m_quit(false)
+    , m_callingPendingFunctors(false)
+    , m_threadId(CurrentThread::tid())
+    , m_poller(Poller::newDefaultPoller(this))
+    , m_wakeupFd(createEventFd())
+    , m_wakeupChannel(new Channel(this, m_wakeupFd)) {
 
     //
     LOG_DEBUG("EventLoop created %p in thread %d", this, m_threadId);
@@ -50,6 +50,7 @@ EventLoop::EventLoop()
         std::bind(&EventLoop::handleRead, this)
     );
     m_wakeupChannel->enableReading();   // 主reactor监视this eventfd的EPOLLIN事件
+    // enableReading会调用channel的updateChannel, updateChannel会通过Eventloop的updateChannel将m_wakeupChannel注册到m_poller内
 }
 
 EventLoop::~EventLoop() {
@@ -69,6 +70,8 @@ void EventLoop::loop() {
     while(!m_quit) {
         m_activeChannels.clear();
         m_pollReturnTime = m_poller->poll(kPollTimeMs, &m_activeChannels);
+
+        // LOG_INFO("Eventloop %p poll return", this);
 
         for(Channel* channel : m_activeChannels) {
             // m_currentActiveChannel = channel;

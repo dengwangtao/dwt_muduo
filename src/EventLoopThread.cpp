@@ -7,7 +7,7 @@ namespace dwt {
 EventLoopThread::EventLoopThread(const ThreadInitCallback& cb, const std::string& name)
     :m_loop(nullptr), m_exiting(false)
     , m_thread(std::bind(&EventLoopThread::threadFunc, this), name)
-    , m_callback(cb), m_mutex(), m_cond() {
+    , m_threadInitCallback(cb), m_mutex(), m_cond() {
     
     // 构造
 }
@@ -44,18 +44,20 @@ void EventLoopThread::threadFunc() {
 
     EventLoop loop; // 创建一个独立的loop
     
-    if(m_callback) {
-        m_callback(&loop);      // 执行ThreadInitCallback函数
+    if(m_threadInitCallback) {            // 线程初始化完毕的回调
+        m_threadInitCallback(&loop);      // 执行ThreadInitCallback函数
     }
 
     {
         std::lock_guard<std::mutex> lock(m_mutex);
         m_loop = &loop;
 
-        m_cond.notify_one();    // 通知, m_loop已经被保存
+        m_cond.notify_one();    // 通知, m_loop已经和EventLoopThread绑定了
     }
 
-    loop.loop();    // 开启事件循环
+    loop.loop();    // 开启事件循环 m_loop->loop();
+    
+
     
     std::lock_guard<std::mutex> lock(m_mutex);
     m_loop = nullptr;

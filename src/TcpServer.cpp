@@ -24,6 +24,7 @@ TcpServer::TcpServer(
         , m_threadPool(std::make_shared<EventLoopThreadPool>(loop, name))
         , m_connectionCallback()
         , m_messageCallback()
+        , m_started(0)
         , m_nextConnId(1) {
     
     // 构造
