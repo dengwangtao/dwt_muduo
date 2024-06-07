@@ -118,6 +118,7 @@ void TcpConnection::sendInLoop(const void* message, size_t len) {
         }
     }
 
+    // 放入Buffer写
     if(!faultError && remaining > 0) {
         size_t oldLen = m_outputBuffer.readableBytes();
         if(oldLen + remaining >= m_highWaterMark && oldLen < m_highWaterMark && m_highWaterMarkCallback) { // 超过高水位

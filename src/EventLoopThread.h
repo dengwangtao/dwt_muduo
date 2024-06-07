@@ -38,7 +38,7 @@ private:
 
     dwt::Thread m_thread;
 
-    ThreadInitCallback m_callback;
+    ThreadInitCallback m_threadInitCallback;
 
     std::mutex m_mutex;
     std::condition_variable m_cond;

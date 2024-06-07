@@ -42,7 +42,9 @@ int Socket::accept(InetAddress* peerAddr) {
     memset(&addr, 0, sizeof addr);
     socklen_t len = static_cast<socklen_t>(sizeof addr);
 
-    int connfd = ::accept(m_socketFd, (sockaddr*)&addr, &len);
+    // int connfd = ::accept(m_socketFd, (sockaddr*)&addr, &len);
+    // 设置返回的用于通信的文件描述符为非阻塞
+    int connfd = ::accept4(m_socketFd, (sockaddr*)&addr, &len, SOCK_NONBLOCK | SOCK_CLOEXEC);
 
     if(connfd >= 0) {
         peerAddr->setSockAddr(addr);

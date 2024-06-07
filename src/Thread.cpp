@@ -36,6 +36,7 @@ void Thread::start() {
     });
 
     sem_wait(&sem);
+    // 保证线程获取到线程id后, 该函数才能返回
 }
 
 void Thread::join() {

@@ -26,3 +26,32 @@
 
    > 原因: len没有赋值
    > 改正: socklen_t len = static_cast<socklen_t>(sizeof addr);
+
+## 整理
+
+构造TcpServer时 => 构造Acceptor => 创建一个listenFd
+
+TcpServer.start() => Acceptor.listen() => Acceptor.channel.enableReading(); 会将listenFd添加到baseLoop的EpollPoller
+
+
+
+
+
+构造TcpServer时 => 构造EventLoopThreadPool => 创建一个
+
+TcpServer.start() => EventLoopThreadPool.statr() 创建多个subLoop
+
+
+
+baseLoop.loop(); 开启事件循环
+
+baseLoop只监听新连接到达
+
+
+
+Acceptor的ReadEventCallback: 为新连接轮询分配一个subLoop
+
+TcpConnection的ReadEventCallback: 处理用户的消息到达回调
+
+
+
