@@ -53,7 +53,7 @@ public:
 
     void setMessageCallback(const MessageCallback& cb) { m_messageCallback = cb; }
 
-    void setCloseCallback(const CloseCallback& cb) { m_closeCallback = cb; }
+    // void setCloseCallback(const CloseCallback& cb) { m_closeCallback = cb; }
 
     void setWriteCompleteCallback(const WriteCompleteCallback& cb) { m_writeCompleteCallback = cb; }
 
@@ -78,7 +78,7 @@ private:
 
     ConnectionCallback m_connectionCallback;
     MessageCallback m_messageCallback;
-    CloseCallback m_closeCallback;
+    // CloseCallback m_closeCallback;
     WriteCompleteCallback m_writeCompleteCallback;
 
     ThreadInitCallback m_threadInitCallback;

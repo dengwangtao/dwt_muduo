@@ -156,7 +156,7 @@ void TcpConnection::shutdownInLoop() {
 
 void TcpConnection::connectEstablished() {
     setState(StateE::kConnected);
-    m_channel->tie(shared_from_this()); // channel 的weekptr监视当前的TcpConnection
+    m_channel->tie(shared_from_this()); // channel 的 weekptr 监视当前的 TcpConnection
     m_channel->enableReading();
 
     m_connectionCallback(shared_from_this());
@@ -233,6 +233,7 @@ void TcpConnection::handleWrite() {
         LOG_ERROR("TcpConnection fd = %d is down, no more writing", m_channel->fd());
     }
 }
+
 void TcpConnection::handleClose() {
     LOG_INFO("TcpConnection::handleClose fd = %d, state = %d", m_channel->fd(), m_state.load());
     setState(StateE::kDisconnected);
@@ -243,6 +244,7 @@ void TcpConnection::handleClose() {
     m_connectionCallback(guardThis);
     m_closeCallback(guardThis);
 }
+
 void TcpConnection::handleError() {
 
     int optval;
