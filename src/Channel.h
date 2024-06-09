@@ -28,7 +28,7 @@ public:
     void setCloseCallback(EventCallback cb);
     void setErrorCallback(EventCallback cb);
 
-    // 防止当channel被手动remove, channel还在执行回调操作
+    // 防止当TcpConnection被remove, channel还在执行TcpConnection的回调操作
     void tie(const std::shared_ptr<void>& obj);
 
     int fd() const;
@@ -69,7 +69,7 @@ private:
     int             m_revents;  // 具体发生的事件
     int             m_index;    // 
 
-    std::weak_ptr<void> m_tie;
+    std::weak_ptr<void> m_tie;  // 用来监视TcpConnection
     bool                m_tied;
 
     ReadEventCallback   m_readCallback;
