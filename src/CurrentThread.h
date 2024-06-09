@@ -10,9 +10,10 @@ namespace CurrentThread {
 
 
 // 线程内全局变量
-extern __thread int t_cacheTid;
+extern __thread int t_cacheTid; // (变量声明)
 
 
+// 通过系统调用获取当前线程tid值
 void cachedTid();
 
 

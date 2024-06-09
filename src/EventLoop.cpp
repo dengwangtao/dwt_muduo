@@ -49,7 +49,7 @@ EventLoop::EventLoop()
     m_wakeupChannel->setReadCallback(
         std::bind(&EventLoop::handleRead, this)
     );
-    m_wakeupChannel->enableReading();   // 主reactor监视this eventfd的EPOLLIN事件
+    m_wakeupChannel->enableReading();   // 自己的poller监视自己的wakeupChannel, eventfd的EPOLLIN事件
     // enableReading会调用channel的updateChannel, updateChannel会通过Eventloop的updateChannel将m_wakeupChannel注册到m_poller内
 }
 
@@ -121,7 +121,7 @@ void EventLoop::wakeup() {
     // 向wakeupfd写一下数据
     uint64_t one = 1;
 
-    ssize_t n = write(m_wakeupFd, static_cast<void*>(&one), sizeof one);
+    ssize_t n = ::write(m_wakeupFd, static_cast<void*>(&one), sizeof one);
 
     if(n != sizeof one) {
         LOG_ERROR("EventLoop::wakeup() writes %lu bytes instead of 8", n);

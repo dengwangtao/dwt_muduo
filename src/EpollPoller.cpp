@@ -14,7 +14,9 @@ const int kDeleted = 2;
 
 
 EpollPoller::EpollPoller(EventLoop* loop)
-    : Poller(loop), m_epfd(::epoll_create1(EPOLL_CLOEXEC)), m_events(kInitEventListSize) {
+    : Poller(loop)
+    , m_epfd(::epoll_create1(EPOLL_CLOEXEC))
+    , m_events(kInitEventListSize) {
     
     // 构造
     if(m_epfd < 0) {
@@ -36,19 +38,25 @@ Timestamp EpollPoller::poll(int timeOutMs, ChannelList* activeChannels) {
     Timestamp now = Timestamp::now();
 
     if(numEvents > 0) {
+
         LOG_DEBUG("function=EpollPoller::poll | %d event happend", numEvents);
         fillActiveChannels(numEvents, activeChannels);
 
         if(static_cast<size_t>(numEvents) == m_events.size()) {
             m_events.resize(m_events.size() * 2);
         }
-    } else if(numEvents == 0) {
+
+    } else if(numEvents == 0) { // epoll_wait超时返回
+
         LOG_DEBUG("function=EpollPoller::poll | no event happend", numEvents);
+
     } else {
+
         if(saveErrno != EINTR) { // 不是被系统调用打断
             errno = saveErrno;
             LOG_ERROR("EpollPoller::poll() error");
         }
+
     }
     return now;
 }
@@ -62,7 +70,9 @@ void EpollPoller::updateChannel(Channel* channel) {
     if(index == kNew || index == kDeleted) {
 
         if(index == kNew) {
+
             m_channels[fd] = channel;
+            
         } else {    // index == kDeleted
 
         }

@@ -37,7 +37,7 @@ size_t Buffer::readFd(int fd, int* saveErrno) {
     return n;
 }
 
-
+// note: fd is nonblocking
 size_t Buffer::writeFd(int fd, int* saveErrno) {
     size_t n = ::write(fd, peek(), readableBytes());
     if(n < 0) {

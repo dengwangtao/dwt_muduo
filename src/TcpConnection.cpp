@@ -85,10 +85,12 @@ void TcpConnection::sendInLoop(const void* message, size_t len) {
     size_t nwrote = 0;
     size_t remaining = len;
     bool faultError = false;
+
     if(m_state == StateE::kDisconnected) {
         LOG_WARN("TcpConnection::sendInLoop: disconnected, giveup writing");
         return;
     }
+
     if(!m_channel->isWriting() && m_outputBuffer.readableBytes() == 0) {
         // channel 第一次开始写数据, 没有待发送数据
 
@@ -103,6 +105,7 @@ void TcpConnection::sendInLoop(const void* message, size_t len) {
                     std::bind(m_writeCompleteCallback, this->shared_from_this())
                 );
             }
+
         } else { // nwrote < 0
 
             nwrote = 0;
@@ -120,7 +123,9 @@ void TcpConnection::sendInLoop(const void* message, size_t len) {
 
     // 放入Buffer写
     if(!faultError && remaining > 0) {
+
         size_t oldLen = m_outputBuffer.readableBytes();
+
         if(oldLen + remaining >= m_highWaterMark && oldLen < m_highWaterMark && m_highWaterMarkCallback) { // 超过高水位
             m_loop->queueInLoop(
                 std::bind(m_highWaterMarkCallback, this->shared_from_this(), oldLen + remaining)
@@ -136,6 +141,8 @@ void TcpConnection::sendInLoop(const void* message, size_t len) {
 
 }
 
+// 调用shutdown时, 数据可能还在发送
+// TcpConnection::handleWrite中当发送完数据, 判断kDisconnecting, 会调用shutdownInLoop
 void TcpConnection::shutdown() {
     if(m_state == StateE::kConnected) {
         setState(StateE::kDisconnecting);
@@ -149,7 +156,7 @@ void TcpConnection::shutdown() {
 
 void TcpConnection::shutdownInLoop() {
     if(!m_channel->isWriting()) {
-        m_socket->shutdownWrite();  // 会触发EPOLLHUP
+        m_socket->shutdownWrite();  // 会触发EPOLLHUP, 调用close回调
     }
 }
 
@@ -197,10 +204,16 @@ void TcpConnection::handleRead(Timestamp receiceTime) {
     }
 
 }
+
+// epoll上报, 标识当前可写,调用该回调继续写
 void TcpConnection::handleWrite() {
+
     if(m_channel->isWriting()) {
+
         int saveErrno = 0;
+
         size_t n = m_outputBuffer.writeFd(m_channel->fd(), &saveErrno);
+
         if(n > 0) {
 
             m_outputBuffer.retrieve(n);
@@ -228,6 +241,7 @@ void TcpConnection::handleWrite() {
             LOG_ERROR("TcpConnection::handleWrite");
             // handleError();
         }
+
     } else { // not m_channel->isWriting()
 
         LOG_ERROR("TcpConnection fd = %d is down, no more writing", m_channel->fd());
