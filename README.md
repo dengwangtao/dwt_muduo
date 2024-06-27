@@ -14,13 +14,50 @@
 `-- test            # 测试
 ```
 
+## 开发顺序
+
+```mermaid
+graph TD;
+
+noncopyable --> Logger
+Timestamp --> Logger
+Logger --> EventLoop
+
+InetAddress --> EventLoop
+
+CurrentThread --> EventLoop
+
+EventLoop --> Poller
+EventLoop --> Channel
+
+Poller --> EpollPoller
+
+Thread --> EventLoopThread
+
+EpollPoller --> EventLoopThread
+Channel --> EventLoopThread
+
+EventLoopThread --> EventLoopThreadPool
+
+EventLoopThreadPool --> Socket
+
+Socket --> Acceptor
+Socket --> Buffer
+
+Buffer --> TcpConnection
+
+Acceptor --> TcpServer
+TcpConnection --> TcpServer
+```
+
+
 
 ## 开发中遇到的问题
 
 1. 编译静态库没问题, 编译main_test对Socket测试时报错:
-   ![image-20240605180800262](C:\docker_v\dev_01\project\dwt_muduo\README.assets\image-20240605180800262.png)
+   ![image-20240605180800262](https://github.com/dengwangtao/dwt_muduo/blob/main/README.assets/image-20240605180800262.png?raw=true)
    原因: vscode 的CMake插件没反应过来, 对顶层CMakeLists.txt保存一下, 重新构建项目即可
-   ![image-20240605181158978](C:\docker_v\dev_01\project\dwt_muduo\README.assets\image-20240605181158978.png)
+   ![image-20240605181158978](https://github.com/dengwangtao/dwt_muduo/blob/main/README.assets/image-20240605181158978.png?raw=true)
 
 2. ::accept 调用返回, errno=22
 
@@ -32,8 +69,6 @@
 构造TcpServer时 => 构造Acceptor => 创建一个listenFd
 
 TcpServer.start() => Acceptor.listen() => Acceptor.channel.enableReading(); 会将listenFd添加到baseLoop的EpollPoller
-
-
 
 
 
