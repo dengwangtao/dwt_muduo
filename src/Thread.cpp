@@ -2,6 +2,7 @@
 #include "CurrentThread.h"
 
 #include <semaphore.h>
+#include <format>
 
 namespace dwt {
 
@@ -49,9 +50,7 @@ void Thread::join() {
 void Thread::setDefaultName() {
     int num = ++ m_numCreated;
     if(m_name.empty()) {
-        char buf[32] = {0};
-        snprintf(buf, 32, "Thread-%d", num);
-        m_name = buf;
+        m_name = std::format("Thread-{}", num);
     }
 }
 

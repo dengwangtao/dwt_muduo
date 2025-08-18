@@ -13,7 +13,7 @@ namespace dwt{
 
 static EventLoop* checkLoopNotNull(EventLoop* loop) {
     if(loop == nullptr) {
-        LOG_FATAL("%s %s %d TcpConnection Loop is nullptr", __FILE__, __FUNCTION__, __LINE__);
+        LOG_FATAL("{} {} {} TcpConnection Loop is nullptr", __FILE__, __FUNCTION__, __LINE__);
     }
     return loop;
 }
@@ -53,13 +53,13 @@ TcpConnection::TcpConnection(
         std::bind(&TcpConnection::handleError, this)
     );
 
-    LOG_INFO("TcpConnection::ctor[%s] at fd = %d", m_name.c_str(), sockfd);
+    LOG_INFO("TcpConnection::ctor[{}] at fd = {}", m_name, sockfd);
 
     m_socket->setKeepAlive(true);
 }
     
 TcpConnection::~TcpConnection() {
-    LOG_INFO("TcpConnection::dtor[%s] at fd = %d state = %d", m_name.c_str(), m_channel->fd(), m_state.load());
+    LOG_INFO("TcpConnection::dtor[{}] at fd = {} state = {}", m_name, m_channel->fd(), (int)m_state.load());
 }
 
 
@@ -186,7 +186,7 @@ void TcpConnection::handleRead(Timestamp receiceTime) {
     int saveErrno = 0;
     size_t n = m_inputBuffer.readFd(m_channel->fd(), &saveErrno);
 
-    // LOG_INFO("%s:%d TcpConnection::handleRead fd=%d getData=%lu bytes", __FILE__, __LINE__, m_channel->fd(), n);
+    // LOG_INFO("{}:{} TcpConnection::handleRead fd={} getData=%lu bytes", __FILE__, __LINE__, m_channel->fd(), n);
 
     if(n > 0) {
         // 已连接的用户有数据到达
@@ -244,12 +244,12 @@ void TcpConnection::handleWrite() {
 
     } else { // not m_channel->isWriting()
 
-        LOG_ERROR("TcpConnection fd = %d is down, no more writing", m_channel->fd());
+        LOG_ERROR("TcpConnection fd = {} is down, no more writing", m_channel->fd());
     }
 }
 
 void TcpConnection::handleClose() {
-    LOG_INFO("TcpConnection::handleClose fd = %d, state = %d", m_channel->fd(), m_state.load());
+    LOG_INFO("TcpConnection::handleClose fd = {}, state = {}", m_channel->fd(), (int)m_state.load());
     setState(StateE::kDisconnected);
 
     m_channel->disableAll();
@@ -270,7 +270,7 @@ void TcpConnection::handleError() {
         err = optval;
     }
 
-    LOG_ERROR("TcpConnection::handleError name=%s SO_ERROR=%d",m_name.c_str(), err);
+    LOG_ERROR("TcpConnection::handleError name={} SO_ERROR={}",m_name, err);
 
 }
 

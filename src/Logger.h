@@ -2,96 +2,40 @@
 
 #include "noncopyable.h"
 #include <string>
+#include "spdlog/spdlog.h"
+#include "singleton.h"
+#include <iostream>
 
 namespace dwt {
 
-// 定义日志级别
-enum class LogLevel {
 
-    DEBUG,
-    INFO,
-    WARN,
-    ERROR,
-    FATAL,
-    NUM_LOG_LEVELS
-};
-
-
-class Logger: noncopyable {
+class Logger: noncopyable, public Singleton<Logger> {
 
 public:
-    // 获取单例对象
-    static Logger& getInstance();
-
-    // 设置日志级别
-    void setLogLevel(LogLevel level);
-
-    // 写日志
-    void log(std::string msg);
-
-private:
-
-    LogLevel m_logLevel;
-
-    Logger() {}
+    static void init(spdlog::level::level_enum min_level = spdlog::level::info)
+    {
+        spdlog::set_pattern("[%Y-%m-%d %H:%M:%S.%e] [%l] %v");
+        spdlog::set_level(min_level);
+        spdlog::flush_on(spdlog::level::err);
+        spdlog::set_error_handler([](const std::string& msg) {
+            std::cerr << "Log error: " << msg << std::endl;
+        });
+    }
 };
 
-
-#ifdef DWT_DEBUG
-
-    #define LOG_DEBUG(logMsgFormat, ...)                    \
-    do {                                                    \
-        dwt::Logger& logger = dwt::Logger::getInstance();   \
-        logger.setLogLevel(dwt::LogLevel::DEBUG);           \
-        char buf[1024] = {0};                               \
-        snprintf(buf, 1024, logMsgFormat, ##__VA_ARGS__);   \
-        logger.log(buf);                                    \
-    } while(0);
-
-#else
-    #define LOG_DEBUG(logMsgFormat, ...) 
-#endif
+#define G_LOGGER dwt::Logger::instance()
 
 
+#define LOG_TRACE(logMsgFormat, ...) spdlog::trace(logMsgFormat, ##__VA_ARGS__)
 
+#define LOG_DEBUG(logMsgFormat, ...) spdlog::debug(logMsgFormat, ##__VA_ARGS__)
 
-#define LOG_INFO(logMsgFormat, ...)                     \
-do {                                                    \
-    dwt::Logger& logger = dwt::Logger::getInstance();   \
-    logger.setLogLevel(dwt::LogLevel::INFO);            \
-    char buf[1024] = {0};                               \
-    snprintf(buf, 1024, logMsgFormat, ##__VA_ARGS__);   \
-    logger.log(buf);                                    \
-} while(0);
+#define LOG_INFO(logMsgFormat, ...) spdlog::info(logMsgFormat, ##__VA_ARGS__)
 
-#define LOG_WARN(logMsgFormat, ...)                     \
-do {                                                    \
-    dwt::Logger& logger = dwt::Logger::getInstance();   \
-    logger.setLogLevel(dwt::LogLevel::WARN);            \
-    char buf[1024] = {0};                               \
-    snprintf(buf, 1024, logMsgFormat, ##__VA_ARGS__);   \
-    logger.log(buf);                                    \
-} while(0);
+#define LOG_WARN(logMsgFormat, ...) spdlog::warn(logMsgFormat, ##__VA_ARGS__)
 
-#define LOG_ERROR(logMsgFormat, ...)                    \
-do {                                                    \
-    dwt::Logger& logger = dwt::Logger::getInstance();   \
-    logger.setLogLevel(dwt::LogLevel::ERROR);           \
-    char buf[1024] = {0};                               \
-    snprintf(buf, 1024, logMsgFormat, ##__VA_ARGS__);   \
-    logger.log(buf);                                    \
-} while(0);
+#define LOG_ERROR(logMsgFormat, ...) spdlog::error(logMsgFormat, ##__VA_ARGS__)
 
-#define LOG_FATAL(logMsgFormat, ...)                    \
-do {                                                    \
-    dwt::Logger& logger = dwt::Logger::getInstance();   \
-    logger.setLogLevel(dwt::LogLevel::FATAL);           \
-    char buf[1024] = {0};                               \
-    snprintf(buf, 1024, logMsgFormat, ##__VA_ARGS__);   \
-    logger.log(buf);                                    \
-    exit(-1);                                           \
-} while(0);
+#define LOG_FATAL(logMsgFormat, ...) spdlog::critical(logMsgFormat, ##__VA_ARGS__)
 
-
-
-}
+} // namespace dwt

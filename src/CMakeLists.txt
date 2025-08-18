@@ -1,7 +1,22 @@
 
+# include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+# include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/spdlog)
 
-aux_source_directory(. SRC_LIST)
+# aux_source_directory(. SRC_LIST)
 
-add_library(dwt_muduo ${SRC_LIST})
+# 扫描所有c++文件
+file(GLOB_RECURSE SRC_HEADER CONFIGURE_DEPENDS *.h)
+file(GLOB_RECURSE SRC_LIST CONFIGURE_DEPENDS *.cpp *.cc)
 
-# target_link_libraries(dwt_muduo pthread)
+
+set(TARGET dwt_muduo)
+add_library(${TARGET} STATIC ${SRC_LIST})
+
+
+# target_link_libraries(${TARGET} pthread)
+
+# 这行让其他目录能通过 `#include "hello/xxx.h"` 访问
+target_include_directories(${TARGET} PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)

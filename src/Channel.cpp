@@ -128,7 +128,7 @@ void Channel::update() {
 
 void Channel::handelEventWithGuard(Timestamp reveiveTime) {
 
-    LOG_INFO("channel handleEvent events: %d", m_revents);
+    LOG_INFO("channel handleEvent events: {}", m_revents);
 
     //EPOLLHUP 表示读写都关闭
     if((m_revents & EPOLLHUP) && !(m_revents & EPOLLIN)) {

@@ -6,6 +6,7 @@
 #include <atomic>
 #include <memory>
 #include <mutex>
+#include <format>
 
 #include "CurrentThread.h"
 #include "Timestamp.h"
@@ -83,4 +84,4 @@ private:
 };
 
 
-}
+} // namespace dwt

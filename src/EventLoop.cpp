@@ -10,8 +10,8 @@
 
 namespace dwt {
 
-// 方式一个线程创建多个EventLoop
-__thread EventLoop* t_loopInThisThread = nullptr;
+// 防止一个线程创建多个EventLoop
+thread_local EventLoop* t_loopInThisThread = nullptr;
 
 const int kPollTimeMs = 10000; // 默认为10秒
 
@@ -37,10 +37,10 @@ EventLoop::EventLoop()
     , m_wakeupChannel(new Channel(this, m_wakeupFd)) {
 
     //
-    LOG_DEBUG("EventLoop created %p in thread %d", this, m_threadId);
+    LOG_DEBUG("EventLoop created {} in thread {}", (void*)this, m_threadId);
 
     if(t_loopInThisThread != nullptr) {
-        LOG_FATAL("another eventloop %p exists in this thread %d", t_loopInThisThread, m_threadId);
+        LOG_FATAL("another eventloop {} exists in this thread {}", (void*)t_loopInThisThread, m_threadId);
     } else {
         t_loopInThisThread = this;
     }
@@ -65,13 +65,13 @@ void EventLoop::loop() {
     m_looping = true;
     m_quit = false;
 
-    LOG_INFO("Eventloop %p start looping", this);
+    LOG_INFO("Eventloop {} start looping", (void*)this);
 
     while(!m_quit) {
         m_activeChannels.clear();
         m_pollReturnTime = m_poller->poll(kPollTimeMs, &m_activeChannels);
 
-        // LOG_INFO("Eventloop %p poll return", this);
+        // LOG_INFO("Eventloop {} poll return", this);
 
         for(Channel* channel : m_activeChannels) {
             // m_currentActiveChannel = channel;
@@ -81,7 +81,7 @@ void EventLoop::loop() {
         doPendingFunctors();
     }
 
-    LOG_INFO("Eventloop %p stop looping", this);
+    LOG_INFO("Eventloop {} stop looping", (void*)this);
     m_looping = false;
 }
 

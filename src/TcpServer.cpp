@@ -9,7 +9,7 @@ namespace dwt {
 
 static EventLoop* checkLoopNotNull(EventLoop* loop) {
     if(loop == nullptr) {
-        LOG_FATAL("%s %s %d mainLoop is nullptr", __FILE__, __FUNCTION__, __LINE__);
+        LOG_FATAL("{} {} {} mainLoop is nullptr", __FILE__, __FUNCTION__, __LINE__);
     }
     return loop;
 }
@@ -71,7 +71,7 @@ void TcpServer::newConnection(int sockfd, const InetAddress& peerAddr) {
     std::string connName = m_ipPort + "#" + std::to_string(m_nextConnId);
     ++ m_nextConnId;
 
-    LOG_DEBUG("TcpServer::newConnection: %s", connName.c_str());
+    LOG_DEBUG("TcpServer::newConnection: {}", connName);
 
     sockaddr_in local;
     ::memset(&local, 0, sizeof local);
@@ -112,7 +112,7 @@ void TcpServer::removeConnectionInLoop(const TcpConnectionPtr& conn) {
 
     std::string connName = conn->name();
 
-    LOG_INFO("TcpServer::removeConnectionInLoop [%s] connection[%s]", m_name.c_str(), connName.c_str());
+    LOG_INFO("TcpServer::removeConnectionInLoop [{}] connection[{}]", m_name, connName);
 
     m_connections.erase(connName);
 

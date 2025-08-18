@@ -22,14 +22,14 @@ void Socket::bindAddress(const InetAddress& localaddr) {
     sockaddr_in* addr = const_cast<sockaddr_in*>(localaddr.getSockAddr());
     int n = ::bind(m_socketFd, reinterpret_cast<struct sockaddr*>(addr), sizeof(*addr));
     if(n != 0) {
-        LOG_FATAL("Socket::bindAddress bind sockfd Error: %d", errno);
+        LOG_FATAL("Socket::bindAddress bind sockfd Error: {}", errno);
     }
 }
 
 void Socket::listen() {
     int n = ::listen(m_socketFd, 10);
     if(n != 0) {
-        LOG_FATAL("Socket::listen Error: %d", errno);
+        LOG_FATAL("Socket::listen Error: {}", errno);
     }
 }
 
@@ -64,7 +64,7 @@ void Socket::setTcpNoDelay(bool on) {
     int optval = on ? 1 : 0;
 
     if(-1 == ::setsockopt(m_socketFd, IPPROTO_TCP, TCP_NODELAY, &optval, static_cast<socklen_t>(sizeof optval))) {
-        LOG_ERROR("Socket::setTcpNoDelay(%d) Error", optval);
+        LOG_ERROR("Socket::setTcpNoDelay({}) Error", optval);
     }
 
 }
@@ -73,7 +73,7 @@ void Socket::setReuseAddr(bool on) {
     int optval = on ? 1 : 0;
 
     if(-1 == ::setsockopt(m_socketFd, SOL_SOCKET, SO_REUSEADDR, &optval, static_cast<socklen_t>(sizeof optval))) {
-        LOG_ERROR("Socket::setReuseAddr(%d) Error", optval);
+        LOG_ERROR("Socket::setReuseAddr({}) Error", optval);
     }
 }
 
@@ -81,7 +81,7 @@ void Socket::setReusePort(bool on) {
     int optval = on ? 1 : 0;
 
     if(-1 == ::setsockopt(m_socketFd, SOL_SOCKET, SO_REUSEPORT, &optval, static_cast<socklen_t>(sizeof optval))) {
-        LOG_ERROR("Socket::setReusePort(%d) Error", optval);
+        LOG_ERROR("Socket::setReusePort({}) Error", optval);
     }
 }
 
@@ -89,7 +89,7 @@ void Socket::setKeepAlive(bool on) {
     int optval = on ? 1 : 0;
 
     if(-1 == ::setsockopt(m_socketFd, SOL_SOCKET, SO_KEEPALIVE, &optval, static_cast<socklen_t>(sizeof optval))) {
-        LOG_ERROR("Socket::setKeepAlive(%d) Error", optval);
+        LOG_ERROR("Socket::setKeepAlive({}) Error", optval);
     }
 }
 

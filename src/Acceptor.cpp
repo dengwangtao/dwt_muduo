@@ -16,7 +16,7 @@ namespace dwt {
 static int createNonBlockingFd() {
     int sockfd = ::socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK | SOCK_CLOEXEC, IPPROTO_TCP);
     if(sockfd == -1) {
-        LOG_FATAL("%s:%d %s error: %d",__FILE__, __LINE__, __FUNCTION__, errno);
+        LOG_FATAL("{}:{} {} error: {}",__FILE__, __LINE__, __FUNCTION__, errno);
     }
     return sockfd;
 }
@@ -68,9 +68,9 @@ void Acceptor::handleRead() {
         }
     } else {
         if(errno == EMFILE) {
-            LOG_ERROR("%s:%d %s error: socket reached limited",__FILE__, __LINE__, __FUNCTION__);
+            LOG_ERROR("{}:{} {} error: socket reached limited",__FILE__, __LINE__, __FUNCTION__);
         } else {
-            LOG_ERROR("%s:%d %s error: %d",__FILE__, __LINE__, __FUNCTION__, errno);
+            LOG_ERROR("{}:{} {} error: {}",__FILE__, __LINE__, __FUNCTION__, errno);
         }
     }
 }
