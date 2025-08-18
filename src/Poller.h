@@ -38,7 +38,7 @@ public:
 
 
 protected:
-    using ChannelMap = std::unordered_map<int, Channel*>;
+    using ChannelMap = std::unordered_map<int, Channel*>; // fd -> channel
     
     ChannelMap m_channels;
 

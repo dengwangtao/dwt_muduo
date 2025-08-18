@@ -16,6 +16,7 @@ class InetAddress;
 /**
  * Acceptor: 传入baseLoop
  * 构造时 创建一个监听的文件描述符listenfd, 和对应的Channel
+ * Channel是对于listenfd的封装, 监听事件发生时, 调用handleRead()
  */
 class Acceptor : noncopyable {
 
