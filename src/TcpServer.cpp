@@ -9,7 +9,7 @@ namespace dwt {
 
 static EventLoop* checkLoopNotNull(EventLoop* loop) {
     if(loop == nullptr) {
-        LOG_FATAL("{} {} {} mainLoop is nullptr", __FILE__, __FUNCTION__, __LINE__);
+        LOG_FATAL("mainLoop is nullptr");
     }
     return loop;
 }
