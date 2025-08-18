@@ -19,4 +19,7 @@ using s64 = int64_t;
 using size_t = std::size_t;
 
 
+#define likely(x) __builtin_expect(!!(x), 1)
+#define unlikely(x) __builtin_expect(!!(x), 0)
+
 }
