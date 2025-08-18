@@ -14,19 +14,19 @@ void Logger_test() {
 
     LOG_DEBUG("{} {} {}", 1024, "dwt", "这是debug日志");
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    // std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
     LOG_INFO("{} {} {}", 1024, "dwt", "这是info日志");
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    // std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
     LOG_WARN("{} {} {}", 1024, "dwt", "这是warn日志");
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    // std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
     LOG_ERROR("{} {} {}", 1024, "dwt", "这是error日志");
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    // std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
     LOG_FATAL("{} {} {}", 1024, "dwt", "这是fatal日志");
 }

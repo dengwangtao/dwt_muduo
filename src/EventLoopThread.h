@@ -15,6 +15,10 @@ namespace dwt {
 class EventLoop;
 
 
+#define USE_COMPOSIZTION
+#undef USE_COMPOSIZTION
+
+#ifdef USE_COMPOSIZTION // 组合模式
 
 class EventLoopThread : noncopyable {
 
@@ -44,6 +48,35 @@ private:
     std::condition_variable m_cond;
 };
 
+#else // 继承模式
+
+class EventLoopThread : public dwt::Thread
+{
+public:
+    using ThreadInitCallback = std::function<void(EventLoop*)>;
+
+    EventLoopThread(const ThreadInitCallback& cb = ThreadInitCallback(), const std::string& name = std::string());
+
+    ~EventLoopThread();
+
+    EventLoop* startLoop();
+
+private:
+
+    void threadFunc();
+
+    EventLoop* m_loop;
+
+    bool m_exiting;
+
+    ThreadInitCallback m_threadInitCallback;
+
+    std::mutex m_mutex;
+    std::condition_variable m_cond;
+};
+
+
+#endif
 
 
 }
