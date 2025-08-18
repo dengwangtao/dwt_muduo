@@ -13,7 +13,7 @@ thread_local int t_cacheTid = 0;
 void cachedTid() {
         // 平台特定的实现
 #ifdef __linux__
-        // Linux：使用 syscall 获取线程ID
+        // Linux：使用 syscall 获取系统线程ID
         t_cacheTid = static_cast<pid_t>(::syscall(SYS_gettid));
 #elif defined(_WIN32)
         // Windows：使用 GetCurrentThreadId 获取线程ID
