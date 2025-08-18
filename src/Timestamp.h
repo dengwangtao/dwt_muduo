@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <string>
+#include "comm_def.h"
+
 
 namespace dwt {
 
@@ -11,14 +13,14 @@ class Timestamp {
 public:
     Timestamp();
 
-    explicit Timestamp(int64_t microSec);
+    explicit Timestamp(s64 microSec);
 
     static Timestamp now();
 
     std::string toString() const;
 
 private:
-    int64_t m_sec;
+    s64 time_s_; // ms
 
 };
 

@@ -1,31 +1,46 @@
 #include "Timestamp.h"
 
-#include <sys/time.h>
+#include <chrono>
+#include <format>
 
 namespace dwt{
 
-Timestamp::Timestamp():m_sec(0) {
-
+Timestamp::Timestamp()
+    : time_s_(0)
+{
 }
 
-Timestamp::Timestamp(int64_t sec):m_sec(sec) {
-
+Timestamp::Timestamp(s64 sec)
+    : time_s_(sec)
+{
 }
 
 // static
-Timestamp Timestamp::now() {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return Timestamp(tv.tv_sec);
+Timestamp Timestamp::now()
+{
+    using namespace std::chrono;
+
+    auto now = system_clock::now();
+    auto duration = now.time_since_epoch();
+    auto ms = duration_cast<seconds>(duration).count();
+    return Timestamp(ms);
 }
 
-std::string Timestamp::toString() const {
-    char buf[128] = {0};
-    struct tm* tm_time = localtime(&m_sec);
-    snprintf(buf, sizeof(buf), "%4d/%02d/%02d %02d:%02d:%02d",
-             tm_time->tm_year + 1900, tm_time->tm_mon + 1, tm_time->tm_mday,
-             tm_time->tm_hour, tm_time->tm_min, tm_time->tm_sec);
-    return buf;
+std::string Timestamp::toString() const
+{
+    using namespace std::chrono;
+
+    // 将秒转换为时间点
+    system_clock::time_point tp = system_clock::from_time_t(time_s_);
+    
+    // 将 time_point 转换为 tm 结构
+    std::time_t time = system_clock::to_time_t(tp);
+    std::tm* tm_time = std::localtime(&time);
+
+    // 使用 std::format (C++20)
+    return std::format("{:04}/{:02}/{:02} {:02}:{:02}:{:02}",
+                        tm_time->tm_year + 1900, tm_time->tm_mon + 1, tm_time->tm_mday,
+                        tm_time->tm_hour, tm_time->tm_min, tm_time->tm_sec);
 }
 
 
