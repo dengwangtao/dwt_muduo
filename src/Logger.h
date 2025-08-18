@@ -26,16 +26,16 @@ public:
 #define G_LOGGER dwt::Logger::instance()
 
 
-#define LOG_TRACE(logMsgFormat, ...) spdlog::trace(logMsgFormat, ##__VA_ARGS__)
+#define LOG_TRACE(logMsgFormat, ...) spdlog::trace("{}:{} " logMsgFormat, __FILE__, __LINE__, ##__VA_ARGS__)
 
-#define LOG_DEBUG(logMsgFormat, ...) spdlog::debug(logMsgFormat, ##__VA_ARGS__)
+#define LOG_DEBUG(logMsgFormat, ...) spdlog::debug("{}:{} " logMsgFormat, __FILE__, __LINE__, ##__VA_ARGS__)
 
-#define LOG_INFO(logMsgFormat, ...) spdlog::info(logMsgFormat, ##__VA_ARGS__)
+#define LOG_INFO(logMsgFormat, ...) spdlog::info("{}:{} " logMsgFormat, __FILE__, __LINE__, ##__VA_ARGS__)
 
-#define LOG_WARN(logMsgFormat, ...) spdlog::warn(logMsgFormat, ##__VA_ARGS__)
+#define LOG_WARN(logMsgFormat, ...) spdlog::warn("{}:{} " logMsgFormat, __FILE__, __LINE__, ##__VA_ARGS__)
 
-#define LOG_ERROR(logMsgFormat, ...) spdlog::error(logMsgFormat, ##__VA_ARGS__)
+#define LOG_ERROR(logMsgFormat, ...) spdlog::error("{}:{} " logMsgFormat, __FILE__, __LINE__, ##__VA_ARGS__)
 
-#define LOG_FATAL(logMsgFormat, ...) spdlog::critical(logMsgFormat, ##__VA_ARGS__)
+#define LOG_FATAL(logMsgFormat, ...) spdlog::critical("{}:{} " logMsgFormat, __FILE__, __LINE__, ##__VA_ARGS__)
 
 } // namespace dwt
