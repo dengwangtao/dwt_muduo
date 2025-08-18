@@ -84,4 +84,6 @@ private:
 };
 
 
+constexpr auto EventLoopSize = sizeof(EventLoop);
+
 } // namespace dwt

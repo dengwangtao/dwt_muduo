@@ -6,6 +6,7 @@
 #include <memory>
 #include <mutex>
 #include <condition_variable>
+#include <future>
 
 #include "Thread.h"
 
@@ -63,6 +64,11 @@ public:
 
 private:
 
+    /**
+     * @brief 线程函数
+     * @note 线程函数，在线程中运行
+     * @return void
+     */
     void threadFunc();
 
     EventLoop* m_loop;
@@ -72,7 +78,7 @@ private:
     ThreadInitCallback m_threadInitCallback;
 
     std::mutex m_mutex;
-    std::condition_variable m_cond;
+    std::promise<void> m_loop_created_promise;
 };
 
 

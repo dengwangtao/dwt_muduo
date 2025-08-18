@@ -31,7 +31,7 @@ public:
 
     static int numCreated() { return m_numCreated; }
 
-private:
+protected:
 
     void setDefaultName();
 

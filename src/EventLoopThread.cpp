@@ -1,5 +1,6 @@
 #include "EventLoopThread.h"
 #include "EventLoop.h"
+#include "Logger.h"
 
 namespace dwt {
 
@@ -77,7 +78,7 @@ EventLoopThread::EventLoopThread(const ThreadInitCallback& cb, const std::string
     , m_exiting(false)
     , m_threadInitCallback(cb)
     , m_mutex()
-    , m_cond() {
+    , m_loop_created_promise() {
     
     // 构造
 }
@@ -95,40 +96,35 @@ EventLoopThread::~EventLoopThread() {
 
 EventLoop* EventLoopThread::startLoop() {
 
-    this->start();   // 启动新线程, 执行EventLoopThread::threadFunc()函数
-    
-    EventLoop* loop = nullptr;
+    std::future<void> future = m_loop_created_promise.get_future();
 
-    {
-        std::unique_lock<std::mutex> lock(m_mutex);
-        while(m_loop == nullptr) {
-            m_cond.wait(lock);
-        }
-        loop = m_loop;
-    }
-    return loop;
+    this->start();   // 启动新线程, 执行EventLoopThread::threadFunc()函数
+    // threadFunc会创建loop，下面的代码要等待loop创建完毕才能返回
+    
+
+    future.wait();   // 等待loop创建完毕
+    LOG_TRACE("EventLoopThread::startLoop() {} m_loop created", m_name);
+    
+    return m_loop;
 }
 
 
 void EventLoopThread::threadFunc() {
 
     EventLoop loop; // 创建一个独立的loop
+    // loop是在该线程栈上创建的
+
+    LOG_TRACE("EventLoopThread::threadFunc() {} m_loop creating", m_name);
+    // std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     
     if(m_threadInitCallback) {            // 线程初始化完毕的回调
         m_threadInitCallback(&loop);      // 执行ThreadInitCallback函数
     }
 
-    {
-        std::lock_guard<std::mutex> lock(m_mutex);
-        m_loop = &loop;
-
-        m_cond.notify_one();    // 通知, m_loop已经和EventLoopThread绑定了
-    }
+    m_loop_created_promise.set_value();   // 通知, loop创建完毕
 
     loop.loop();    // 开启事件循环 m_loop->loop();
-    
-
-    
+        
     std::lock_guard<std::mutex> lock(m_mutex);
     m_loop = nullptr;
 }
