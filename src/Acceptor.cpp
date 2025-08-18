@@ -59,18 +59,27 @@ void Acceptor::handleRead() {
     InetAddress peerAddr;
     int connfd = m_acceptSocket.accept(&peerAddr);
 
-    if(connfd >= 0) {
-        if(m_newConnectionCallback) {
+    if(connfd >= 0)
+    {
+        if(m_newConnectionCallback)
+        {
             // m_newConnectionCallback的功能: 轮询找到 subloop, 并唤醒 subloop, 分发客户端的channel
             m_newConnectionCallback(connfd, peerAddr);
-        } else {
+        }
+        else
+        {
             ::close(connfd);
         }
-    } else {
-        if(errno == EMFILE) {
-            LOG_ERROR("{}:{} {} error: socket reached limited",__FILE__, __LINE__, __FUNCTION__);
-        } else {
-            LOG_ERROR("{}:{} {} error: {}",__FILE__, __LINE__, __FUNCTION__, errno);
+    }
+    else
+    {
+        if(errno == EMFILE)
+        {
+            LOG_ERROR("error: socket reached limited");
+        }
+        else
+        {
+            LOG_ERROR("error: {}", errno);
         }
     }
 }

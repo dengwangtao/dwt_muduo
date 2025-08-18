@@ -170,8 +170,11 @@ void TcpConnection::connectEstablished() {
 }
 
 void TcpConnection::connectDestoryed() {
-    if(m_state == StateE::kDisconnected) {
+    if(m_state == StateE::kConnected)
+    {
         setState(StateE::kDisconnected);
+
+        LOG_INFO("TcpConnection::connectDestoryed fd = {} state = {}", m_channel->fd(), (int)m_state.load());
 
         m_channel->disableAll();
         m_connectionCallback(shared_from_this());
