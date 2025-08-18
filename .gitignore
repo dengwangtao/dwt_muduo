@@ -4,3 +4,6 @@ build/
 
 */*core*
 
+bin/
+
+lib/
