@@ -43,7 +43,7 @@ private:
 
     std::string m_name;
     bool m_started;
-    int m_numThreads;
+    int m_numThreads; // 工作线程数，默认为0，表示不创建新线程，只在主线程中运行
     int m_next;
 
     std::vector<std::unique_ptr<EventLoopThread>> m_threads;

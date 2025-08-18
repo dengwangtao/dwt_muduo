@@ -104,6 +104,8 @@ EventLoop* EventLoopThread::startLoop() {
 
     future.wait();   // 等待loop创建完毕
     LOG_TRACE("EventLoopThread::startLoop() {} m_loop created", m_name);
+
+    assert(m_loop != nullptr);
     
     return m_loop;
 }
@@ -121,6 +123,7 @@ void EventLoopThread::threadFunc() {
         m_threadInitCallback(&loop);      // 执行ThreadInitCallback函数
     }
 
+    m_loop = &loop;
     m_loop_created_promise.set_value();   // 通知, loop创建完毕
 
     loop.loop();    // 开启事件循环 m_loop->loop();

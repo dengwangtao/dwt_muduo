@@ -36,6 +36,10 @@ public:
 
 #define LOG_ERROR(logMsgFormat, ...) spdlog::error("{}:{} " logMsgFormat, __FILE__, __LINE__, ##__VA_ARGS__)
 
-#define LOG_FATAL(logMsgFormat, ...) spdlog::critical("{}:{} " logMsgFormat, __FILE__, __LINE__, ##__VA_ARGS__)
+#define LOG_FATAL(logMsgFormat, ...) \
+    { \
+        spdlog::critical("{}:{} " logMsgFormat, __FILE__, __LINE__, ##__VA_ARGS__); \
+        std::abort(); \
+    }
 
 } // namespace dwt
