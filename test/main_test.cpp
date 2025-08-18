@@ -114,7 +114,7 @@ void Acceptor_test() {
 void TcpServer_test() {
     dwt::EventLoop loop;
     dwt::InetAddress addr("127.0.0.1", 8080);
-    dwt::TcpServer server(&loop, addr, "test");
+    dwt::TcpServer server(&loop, addr, "test", dwt::TcpServer::Option::kReusePort); // 端口共享
 
 
     server.setConnectionCallback([](const dwt::TcpConnectionPtr& conn) {
