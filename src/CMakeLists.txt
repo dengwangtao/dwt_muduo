@@ -15,6 +15,7 @@ add_library(${TARGET} STATIC ${SRC_LIST})
 
 
 set(FMT_DIR ${CMAKE_SOURCE_DIR}/thirdparty/fmt)
+set(SPDLOG_DIR ${CMAKE_SOURCE_DIR}/thirdparty/spdlog)
 
 
 
@@ -25,6 +26,7 @@ target_include_directories(${TARGET} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${FMT_DIR}/include
+    ${SPDLOG_DIR}/include
 )
 
 target_link_directories(${TARGET} PUBLIC
