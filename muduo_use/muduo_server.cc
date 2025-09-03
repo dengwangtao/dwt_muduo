@@ -12,7 +12,7 @@ public:
         muduo::net::EventLoop* loop,
         const muduo::net::InetAddress& listenAddr,
         const std::string& nameArg)
-        :m_server(loop, listenAddr, nameArg), m_loop(loop)  {
+        :m_server(loop, listenAddr, nameArg), loop_(loop)  {
 
         // 构造函数
 
@@ -49,7 +49,7 @@ private:
 
 private:
 
-    muduo::net::EventLoop *m_loop;        // 事件循环
+    muduo::net::EventLoop *loop_;        // 事件循环
     muduo::net::TcpServer m_server;
 
 };

@@ -37,13 +37,13 @@ private:
     void threadFunc();
 
 
-    EventLoop* m_loop;
+    EventLoop* loop_;
 
     bool m_exiting;
 
     dwt::Thread m_thread;
 
-    ThreadInitCallback m_threadInitCallback;
+    ThreadInitCallback threadInitCallback_;
 
     std::mutex m_mutex;
     std::condition_variable m_cond;
@@ -71,11 +71,11 @@ private:
      */
     void threadFunc();
 
-    EventLoop* m_loop;
+    EventLoop* loop_;
 
     bool m_exiting;
 
-    ThreadInitCallback m_threadInitCallback;
+    ThreadInitCallback threadInitCallback_;
 
     std::mutex m_mutex;
     std::promise<void> m_loop_created_promise;

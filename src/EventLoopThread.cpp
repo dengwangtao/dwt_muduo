@@ -8,10 +8,10 @@ namespace dwt {
 #ifdef USE_COMPOSIZTION
 
 EventLoopThread::EventLoopThread(const ThreadInitCallback& cb, const std::string& name)
-    : m_loop(nullptr)
+    : loop_(nullptr)
     , m_exiting(false)
     , m_thread(std::bind(&EventLoopThread::threadFunc, this), name)
-    , m_threadInitCallback(cb)
+    , threadInitCallback_(cb)
     , m_mutex()
     , m_cond() {
     
@@ -21,8 +21,8 @@ EventLoopThread::EventLoopThread(const ThreadInitCallback& cb, const std::string
 EventLoopThread::~EventLoopThread() {
 
     m_exiting = true;
-    if(m_loop) {
-        m_loop->quit();
+    if(loop_) {
+        loop_->quit();
 
         m_thread.join();
     }
@@ -37,10 +37,10 @@ EventLoop* EventLoopThread::startLoop() {
 
     {
         std::unique_lock<std::mutex> lock(m_mutex);
-        while(m_loop == nullptr) {
+        while(loop_ == nullptr) {
             m_cond.wait(lock);
         }
-        loop = m_loop;
+        loop = loop_;
     }
     return loop;
 }
@@ -50,23 +50,23 @@ void EventLoopThread::threadFunc() {
 
     EventLoop loop; // 创建一个独立的loop
     
-    if(m_threadInitCallback) {            // 线程初始化完毕的回调
-        m_threadInitCallback(&loop);      // 执行ThreadInitCallback函数
+    if(threadInitCallback_) {            // 线程初始化完毕的回调
+        threadInitCallback_(&loop);      // 执行ThreadInitCallback函数
     }
 
     {
         std::lock_guard<std::mutex> lock(m_mutex);
-        m_loop = &loop;
+        loop_ = &loop;
 
         m_cond.notify_one();    // 通知, m_loop已经和EventLoopThread绑定了
     }
 
-    loop.loop();    // 开启事件循环 m_loop->loop();
+    loop.loop();    // 开启事件循环 loop_->loop();
     
 
     
     std::lock_guard<std::mutex> lock(m_mutex);
-    m_loop = nullptr;
+    loop_ = nullptr;
 }
 
 #else
@@ -74,9 +74,9 @@ void EventLoopThread::threadFunc() {
 
 EventLoopThread::EventLoopThread(const ThreadInitCallback& cb, const std::string& name)
     : dwt::Thread(std::bind(&EventLoopThread::threadFunc, this), name)
-    , m_loop(nullptr)
+    , loop_(nullptr)
     , m_exiting(false)
-    , m_threadInitCallback(cb)
+    , threadInitCallback_(cb)
     , m_mutex()
     , m_loop_created_promise() {
     
@@ -86,8 +86,8 @@ EventLoopThread::EventLoopThread(const ThreadInitCallback& cb, const std::string
 EventLoopThread::~EventLoopThread() {
 
     m_exiting = true;
-    if(m_loop) {
-        m_loop->quit();
+    if(loop_) {
+        loop_->quit();
 
         this->join();
     }
@@ -103,11 +103,11 @@ EventLoop* EventLoopThread::startLoop() {
     
 
     future.wait();   // 等待loop创建完毕
-    LOG_TRACE("EventLoopThread::startLoop() {} m_loop created", m_name);
+    LOG_TRACE("EventLoopThread::startLoop() {} loop_ created", name_);
 
-    assert(m_loop != nullptr);
+    assert(loop_ != nullptr);
     
-    return m_loop;
+    return loop_;
 }
 
 
@@ -116,20 +116,20 @@ void EventLoopThread::threadFunc() {
     EventLoop loop; // 创建一个独立的loop
     // loop是在该线程栈上创建的
 
-    LOG_TRACE("EventLoopThread::threadFunc() {} m_loop creating", m_name);
+    LOG_TRACE("EventLoopThread::threadFunc() {} loop_ creating", name_);
     // std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     
-    if(m_threadInitCallback) {            // 线程初始化完毕的回调
-        m_threadInitCallback(&loop);      // 执行ThreadInitCallback函数
+    if(threadInitCallback_) {            // 线程初始化完毕的回调
+        threadInitCallback_(&loop);      // 执行ThreadInitCallback函数
     }
 
-    m_loop = &loop;
+    loop_ = &loop;
     m_loop_created_promise.set_value();   // 通知, loop创建完毕
 
-    loop.loop();    // 开启事件循环 m_loop->loop();
+    loop.loop();    // 开启事件循环 loop_->loop();
         
     std::lock_guard<std::mutex> lock(m_mutex);
-    m_loop = nullptr;
+    loop_ = nullptr;
 }
 
 #endif

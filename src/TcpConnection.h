@@ -26,8 +26,8 @@ public:
     
     ~TcpConnection();
 
-    EventLoop* getLoop() const { return m_loop; }
-    const std::string& name() const { return m_name; }
+    EventLoop* getLoop() const { return loop_; }
+    const std::string& name() const { return name_; }
     const InetAddress& localAddress() const { return m_localAddr; }
     const InetAddress& peerAddress() const { return m_peerAddr; }
     bool connected() const { return m_state == StateE::kConnected; }
@@ -39,11 +39,11 @@ public:
 
 
     void setConnectionCallback(const ConnectionCallback& cb) {
-        m_connectionCallback = cb;
+        connectionCallback_ = cb;
     }
 
     void setMessageCallback(const MessageCallback& cb) {
-        m_messageCallback = cb;
+        messageCallback_ = cb;
     }
 
     void setCloseCallback(const CloseCallback& cb) {
@@ -51,7 +51,7 @@ public:
     }
 
     void setWriteCompleteCallback(const WriteCompleteCallback& cb) {
-        m_writeCompleteCallback = cb;
+        writeCompleteCallback_ = cb;
     }
 
     void setHighWaterMarkCallback(const HighWaterMarkCallback& cb, size_t highWatermark) {
@@ -82,8 +82,8 @@ private:
     void setState(StateE s) { m_state = s; }
 
 
-    EventLoop* m_loop;
-    const std::string m_name;
+    EventLoop* loop_;
+    const std::string name_;
     std::atomic<StateE> m_state; // StateE 类型
     bool m_reading;
 
@@ -93,10 +93,10 @@ private:
     const InetAddress m_localAddr;
     const InetAddress m_peerAddr;
 
-    ConnectionCallback m_connectionCallback;
-    MessageCallback m_messageCallback;
+    ConnectionCallback connectionCallback_;
+    MessageCallback messageCallback_;
     CloseCallback m_closeCallback;
-    WriteCompleteCallback m_writeCompleteCallback;
+    WriteCompleteCallback writeCompleteCallback_;
 
     HighWaterMarkCallback m_highWaterMarkCallback;
 

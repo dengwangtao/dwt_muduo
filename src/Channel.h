@@ -63,7 +63,7 @@ private:
     static const int kReadEvent;
     static const int kWriteEvent;
 
-    EventLoop*      m_loop;     // 事件循环
+    EventLoop*      loop_;     // 事件循环
     const int       m_fd;       // fd, poller监听的对象
     int             m_events;   // 感兴趣的事件
     int             m_revents;  // 具体发生的事件

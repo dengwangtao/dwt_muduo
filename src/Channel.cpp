@@ -13,7 +13,7 @@ const int Channel::kWriteEvent = EPOLLOUT;
 
 
 Channel::Channel(EventLoop* loop, int fd)
-    : m_fd(fd), m_loop(loop), m_events(0), m_revents(0), m_index(-1), m_tied(false) {
+    : m_fd(fd), loop_(loop), m_events(0), m_revents(0), m_index(-1), m_tied(false) {
     
     // 一个EventLoop管理多个Channel
 }
@@ -110,20 +110,20 @@ bool Channel::isReading() const {
 
 
 EventLoop* Channel::ownerLoop() {
-    return m_loop;
+    return loop_;
 }
 
 void Channel::remove() {
     // 通过EventLoop让Poller删除Channel
-    // m_loop->removeChannel(this);
-    m_loop->removeChannel(this);
+    // loop_->removeChannel(this);
+    loop_->removeChannel(this);
 }
 
 
 void Channel::update() {
     // 通过EventLoop让Poller更新Channel状态
-    // m_loop->updateChannel(this);
-    m_loop->updateChannel(this);
+    // loop_->updateChannel(this);
+    loop_->updateChannel(this);
 }
 
 void Channel::handelEventWithGuard(Timestamp reveiveTime) {

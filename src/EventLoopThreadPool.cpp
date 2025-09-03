@@ -10,12 +10,12 @@ namespace dwt {
 
 EventLoopThreadPool::EventLoopThreadPool(EventLoop* baseLoop, const std::string& name)
     : m_baseLoop(baseLoop)
-    , m_name(name)
-    , m_started(false)
+    , name_(name)
+    , started_(false)
     , m_numThreads(0)
     , m_next(0) {
     
-    LOG_INFO("EventLoopThreadPool[{}] created", m_name);
+    LOG_INFO("EventLoopThreadPool[{}] created", name_);
 }
     
 EventLoopThreadPool::~EventLoopThreadPool() {
@@ -24,11 +24,11 @@ EventLoopThreadPool::~EventLoopThreadPool() {
 
 void EventLoopThreadPool::start(const ThreadInitCallback& cb) {
 
-    m_started = true;
+    started_ = true;
 
     // 创建线程
     for(int i = 0; i < m_numThreads; ++ i) {
-        std::string sub_name = m_name + std::to_string(i);
+        std::string sub_name = name_ + std::to_string(i);
 
         {
             auto elt = std::make_unique<EventLoopThread>(cb, sub_name);

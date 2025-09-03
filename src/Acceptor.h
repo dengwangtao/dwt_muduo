@@ -39,7 +39,7 @@ private:
 
     void handleRead();
 
-    EventLoop* m_loop;
+    EventLoop* loop_;
     Socket m_acceptSocket;
     Channel m_acceptChannel;
 

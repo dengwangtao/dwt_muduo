@@ -39,23 +39,23 @@ public:
     TcpServer(EventLoop* loop, const InetAddress& listenAddr, const std::string& name, Option option = Option::kNoReusePort);
     ~TcpServer();
 
-    const std::string& ipPort() const { return m_ipPort; }
-    const std::string& name() const { return m_name; }
-    EventLoop* getLoop() const { return m_loop; }
+    const std::string& ipPort() const { return ipPort_; }
+    const std::string& name() const { return name_; }
+    EventLoop* getLoop() const { return loop_; }
 
-    void setThreadInitCallback(const ThreadInitCallback& cb) { m_threadInitCallback = cb; }
+    void setThreadInitCallback(const ThreadInitCallback& cb) { threadInitCallback_ = cb; }
 
     void setThreadNum(int numThreads);
 
     void start();
 
-    void setConnectionCallback(const ConnectionCallback& cb) { m_connectionCallback = cb; }
+    void setConnectionCallback(const ConnectionCallback& cb) { connectionCallback_ = cb; }
 
-    void setMessageCallback(const MessageCallback& cb) { m_messageCallback = cb; }
+    void setMessageCallback(const MessageCallback& cb) { messageCallback_ = cb; }
 
     // void setCloseCallback(const CloseCallback& cb) { m_closeCallback = cb; }
 
-    void setWriteCompleteCallback(const WriteCompleteCallback& cb) { m_writeCompleteCallback = cb; }
+    void setWriteCompleteCallback(const WriteCompleteCallback& cb) { writeCompleteCallback_ = cb; }
 
 private:
 
@@ -69,25 +69,25 @@ private:
     using ConnectionMap = std::unordered_map<std::string, TcpConnectionPtr>;
 
 
-    EventLoop* m_loop;          // baseLoop, 用户传入
-    const std::string m_ipPort;
-    const std::string m_name;
+    EventLoop* loop_;          // baseLoop, 用户传入
+    const std::string ipPort_;
+    const std::string name_;
 
-    std::unique_ptr<Acceptor> m_acceptor;   // 运行在mainLoop, 监听新连接事件
-    std::shared_ptr<EventLoopThreadPool> m_threadPool;  // one loop per thread
+    std::unique_ptr<Acceptor> acceptor_;   // 运行在mainLoop, 监听新连接事件
+    std::shared_ptr<EventLoopThreadPool> threadPool_;  // one loop per thread
 
-    ConnectionCallback m_connectionCallback;
-    MessageCallback m_messageCallback;
+    ConnectionCallback connectionCallback_;
+    MessageCallback messageCallback_;
     // CloseCallback m_closeCallback;
-    WriteCompleteCallback m_writeCompleteCallback;
+    WriteCompleteCallback writeCompleteCallback_;
+    
+    ThreadInitCallback threadInitCallback_;
 
-    ThreadInitCallback m_threadInitCallback;
+    std::atomic<int> started_;
 
-    std::atomic<int> m_started;
+    ConnectionMap connections_;    //保存所有连接
 
-    ConnectionMap m_connections;    //保存所有连接
-
-    int m_nextConnId;
+    int nextConnId_;
 
 };
 
