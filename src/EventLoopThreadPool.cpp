@@ -9,11 +9,11 @@ namespace dwt {
 
 
 EventLoopThreadPool::EventLoopThreadPool(EventLoop* baseLoop, const std::string& name)
-    : m_baseLoop(baseLoop)
+    : baseLoop_(baseLoop)
     , name_(name)
     , started_(false)
-    , m_numThreads(0)
-    , m_next(0) {
+    , numThreads_(0)
+    , next_(0) {
     
     LOG_INFO("EventLoopThreadPool[{}] created", name_);
 }
@@ -27,21 +27,21 @@ void EventLoopThreadPool::start(const ThreadInitCallback& cb) {
     started_ = true;
 
     // 创建线程
-    for(int i = 0; i < m_numThreads; ++ i) {
+    for(int i = 0; i < numThreads_; ++ i) {
         std::string sub_name = name_ + std::to_string(i);
 
         {
             auto elt = std::make_unique<EventLoopThread>(cb, sub_name);
-            m_threads.push_back(std::move(elt));
+            threads_.push_back(std::move(elt));
         }
 
-        auto* loop = m_threads.back()->startLoop(); // 获取该线程所对应的EventLoop
-        m_loops.push_back(loop);
+        auto* loop = threads_.back()->startLoop(); // 获取该线程所对应的EventLoop
+        loops_.push_back(loop);
     }
 
     // 如果没有创建线程，则在主线程中运行， cb为用户自定义的初始化线程的回调
-    if(m_numThreads == 0 && cb) {
-        cb(m_baseLoop);
+    if(numThreads_ == 0 && cb) {
+        cb(baseLoop_);
     }
 }
 
@@ -50,27 +50,27 @@ void EventLoopThreadPool::start(const ThreadInitCallback& cb) {
 EventLoop* EventLoopThreadPool::getNextLoop() {
 
     // 默认为主线程
-    EventLoop* loop = m_baseLoop;
+    EventLoop* loop = baseLoop_;
 
     // 如果有工作线程，则轮询
-    if(!m_loops.empty()) {
+    if(!loops_.empty()) {
         // round-robin
-        loop = m_loops[m_next ++];
-        // if(static_cast<ssize_t>(m_next) >= m_loops.size()) {
-        //     m_next = 0;
+        loop = loops_[next_ ++];
+        // if(static_cast<ssize_t>(next_) >= loops_.size()) {
+        //     next_ = 0;
         // }
-        m_next %= m_loops.size();
+        next_ %= loops_.size();
     }
 
     return loop;
 }
 
 std::vector<EventLoop*> EventLoopThreadPool::getAllLoops() {
-    if(m_numThreads <= 0) {
-        return {m_baseLoop};
+    if(numThreads_ <= 0) {
+        return {baseLoop_};
     }
 
-    return m_loops;
+    return loops_;
 }
 
 

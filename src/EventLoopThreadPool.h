@@ -26,7 +26,7 @@ public:
 
     void start(const ThreadInitCallback& cb = ThreadInitCallback());
 
-    void setThreadNum(int numThreads) {m_numThreads = numThreads; }
+    void setThreadNum(int numThreads) {numThreads_ = numThreads; }
 
     EventLoop* getNextLoop();   // 轮询的方式给分channel给subloop
 
@@ -39,15 +39,15 @@ public:
 private:
 
 
-    EventLoop* m_baseLoop;          // 返回给用户
+    EventLoop* baseLoop_;          // 返回给用户
 
     std::string name_;
     bool started_;
-    int m_numThreads; // 工作线程数，默认为0，表示不创建新线程，只在主线程中运行
-    int m_next;
+    int numThreads_; // 工作线程数，默认为0，表示不创建新线程，只在主线程中运行
+    int next_;
 
-    std::vector<std::unique_ptr<EventLoopThread>> m_threads;
-    std::vector<EventLoop*> m_loops;
+    std::vector<std::unique_ptr<EventLoopThread>> threads_;
+    std::vector<EventLoop*> loops_;
 };
 
 

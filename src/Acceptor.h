@@ -28,10 +28,10 @@ public:
     ~Acceptor();
 
     void setNewConnectionCallback(const NewConnectionCallback& cb) {
-        m_newConnectionCallback = cb;
+        newConnectionCallback_ = cb;
     }
 
-    bool listening() const { return m_listening; }
+    bool listening() const { return listening_; }
 
     void listen();
 
@@ -40,12 +40,12 @@ private:
     void handleRead();
 
     EventLoop* loop_;
-    Socket m_acceptSocket;
-    Channel m_acceptChannel;
+    Socket acceptSocket_;
+    Channel acceptChannel_;
 
-    bool m_listening;
+    bool listening_;
 
-    NewConnectionCallback m_newConnectionCallback;
+    NewConnectionCallback newConnectionCallback_;
 };
 
 
