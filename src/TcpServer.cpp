@@ -54,8 +54,10 @@ void TcpServer::setThreadNum(int numThreads) {
 
 void TcpServer::start() {
     if(started_ ++ == 0) {
-        threadPool_->start(threadInitCallback_);
+        threadPool_->start(threadInitCallback_); // 初始化线程池, 启动线程， 且每个线程的loop开始loop
 
+        // 让 mainLoop 开始监听, 让 acceptor_ 在 mainLoop 的线程中运行
+        // 在用户调用base loop后，base loop调用acceptor_的handleRead
         loop_->runInLoop(
             std::bind(&Acceptor::listen, acceptor_.get())
         );
@@ -67,8 +69,9 @@ void TcpServer::start() {
 void TcpServer::newConnection(int sockfd, const InetAddress& peerAddr) {
 
     EventLoop* ioLoop = threadPool_->getNextLoop();
+    LOG_INFO("newConnection getNextLoop is {}", ioLoop->name());
 
-    std::string connName = ipPort_ + "#" + std::to_string(nextConnId_);
+    std::string connName = fmt::format("{}#{}", ipPort_, nextConnId_);
     ++ nextConnId_;
 
     LOG_DEBUG("TcpServer::newConnection: {}", connName);

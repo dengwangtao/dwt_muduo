@@ -27,14 +27,16 @@ int createEventFd() {
 }
 
 
-EventLoop::EventLoop()
+EventLoop::EventLoop(const std::string& name)
     : m_looping(false)
     , m_quit(false)
     , m_callingPendingFunctors(false)
     , m_threadId(CurrentThread::tid())
     , m_poller(Poller::newDefaultPoller(this))
     , m_wakeupFd(createEventFd())
-    , m_wakeupChannel(new Channel(this, m_wakeupFd)) {
+    , m_wakeupChannel(new Channel(this, m_wakeupFd))
+    , name_(name)
+{
 
     //
     LOG_DEBUG("EventLoop created {} in thread {}", (void*)this, m_threadId);

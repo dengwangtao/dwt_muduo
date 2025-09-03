@@ -145,6 +145,7 @@ void Channel::handelEventWithGuard(Timestamp reveiveTime) {
 
     if(m_revents & (EPOLLIN | EPOLLPRI)) {
         if(m_readCallback) {
+            LOG_DEBUG("channel{} handleEvent readCallback", fd());
             m_readCallback(reveiveTime);
         }
     }

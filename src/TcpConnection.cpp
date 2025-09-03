@@ -164,7 +164,7 @@ void TcpConnection::shutdownInLoop() {
 void TcpConnection::connectEstablished() {
     setState(StateE::kConnected);
     m_channel->tie(shared_from_this()); // channel 的 weekptr 监视当前的 TcpConnection
-    m_channel->enableReading();
+    m_channel->enableReading();  // 将channel注册到poller中
 
     connectionCallback_(shared_from_this());
 }

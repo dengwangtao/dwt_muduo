@@ -59,6 +59,8 @@ void Acceptor::handleRead() {
     InetAddress peerAddr;
     int connfd = acceptSocket_.accept(&peerAddr);
 
+    LOG_DEBUG("new connection from {}", peerAddr.toIpPort());
+
     if(connfd >= 0)
     {
         if(newConnectionCallback_)

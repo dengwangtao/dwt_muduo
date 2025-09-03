@@ -39,7 +39,7 @@ private:
 
     EventLoop* loop_;
 
-    bool m_exiting;
+    bool exiting_;
 
     dwt::Thread m_thread;
 
@@ -73,12 +73,12 @@ private:
 
     EventLoop* loop_;
 
-    bool m_exiting;
+    bool exiting_;
 
     ThreadInitCallback threadInitCallback_;
 
     std::mutex m_mutex;
-    std::promise<void> m_loop_created_promise;
+    std::promise<void> loop_created_promise_;
 };
 
 

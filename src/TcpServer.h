@@ -73,7 +73,7 @@ private:
     const std::string ipPort_;
     const std::string name_;
 
-    std::unique_ptr<Acceptor> acceptor_;   // 运行在mainLoop, 监听新连接事件
+    std::unique_ptr<Acceptor> acceptor_;   // 运行在 mainLoop, 监听新连接事件
     std::shared_ptr<EventLoopThreadPool> threadPool_;  // one loop per thread
 
     ConnectionCallback connectionCallback_;

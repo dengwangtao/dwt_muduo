@@ -112,7 +112,7 @@ void Acceptor_test() {
  * 回声服务器
  */
 void TcpServer_test() {
-    dwt::EventLoop loop;
+    dwt::EventLoop loop("base_loop");
     dwt::InetAddress addr("127.0.0.1", 8080);
     dwt::TcpServer server(&loop, addr, "test", dwt::TcpServer::Option::kReusePort); // 端口共享
 
