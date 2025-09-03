@@ -25,29 +25,29 @@ static int createNonBlockingFd() {
 
 Acceptor::Acceptor(EventLoop* loop, const InetAddress& listenAddr, bool reusePort)
     : loop_(loop)
-    , m_acceptSocket(createNonBlockingFd())
-    , m_acceptChannel(loop, m_acceptSocket.fd())
-    , m_listening(false) {
+    , acceptSocket_(createNonBlockingFd())
+    , acceptChannel_(loop, acceptSocket_.fd())
+    , listening_(false) {
 
     // 构造
-    m_acceptSocket.setReuseAddr(true);
-    m_acceptSocket.setReusePort(reusePort);
-    m_acceptSocket.bindAddress(listenAddr);
-    m_acceptChannel.setReadCallback(
+    acceptSocket_.setReuseAddr(true);
+    acceptSocket_.setReusePort(reusePort);
+    acceptSocket_.bindAddress(listenAddr);
+    acceptChannel_.setReadCallback(
         std::bind(&Acceptor::handleRead, this)
     );
 }
 
 Acceptor::~Acceptor() {
-    m_acceptChannel.disableAll();
-    m_acceptChannel.remove();
+    acceptChannel_.disableAll();
+    acceptChannel_.remove();
 }
 
 
 void Acceptor::listen() {
-    m_listening = true;
-    m_acceptSocket.listen();
-    m_acceptChannel.enableReading();
+    listening_ = true;
+    acceptSocket_.listen();
+    acceptChannel_.enableReading();
 }
 
 
@@ -57,14 +57,14 @@ void Acceptor::listen() {
 void Acceptor::handleRead() {
 
     InetAddress peerAddr;
-    int connfd = m_acceptSocket.accept(&peerAddr);
+    int connfd = acceptSocket_.accept(&peerAddr);
 
     if(connfd >= 0)
     {
-        if(m_newConnectionCallback)
+        if(newConnectionCallback_)
         {
             // m_newConnectionCallback的功能: 轮询找到 subloop, 并唤醒 subloop, 分发客户端的channel
-            m_newConnectionCallback(connfd, peerAddr);
+            newConnectionCallback_(connfd, peerAddr);
         }
         else
         {
