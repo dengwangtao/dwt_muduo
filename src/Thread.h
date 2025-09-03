@@ -23,11 +23,11 @@ public:
 
     void join();
 
-    bool started() const { return m_started; }
+    bool started() const { return started_; }
 
     pid_t tid() const {return m_tid; }
 
-    const std::string& name() const {return m_name; }
+    const std::string& name() const {return name_; }
 
     static int numCreated() { return m_numCreated; }
 
@@ -35,7 +35,7 @@ protected:
 
     void setDefaultName();
 
-    bool m_started;
+    bool started_;
     bool m_joined;
 
     std::unique_ptr<std::thread> m_thread;
@@ -43,7 +43,7 @@ protected:
     pid_t m_tid;
     ThreadFunc m_func;
 
-    std::string m_name;
+    std::string name_;
 
     static std::atomic<int> m_numCreated;   // 已创建的线程
 };

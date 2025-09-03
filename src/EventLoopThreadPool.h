@@ -32,17 +32,17 @@ public:
 
     std::vector<EventLoop*> getAllLoops();
 
-    bool started() const { return m_started; }
+    bool started() const { return started_; }
 
-    const std::string& name() const { return m_name; }
+    const std::string& name() const { return name_; }
 
 private:
 
 
     EventLoop* m_baseLoop;          // 返回给用户
 
-    std::string m_name;
-    bool m_started;
+    std::string name_;
+    bool started_;
     int m_numThreads; // 工作线程数，默认为0，表示不创建新线程，只在主线程中运行
     int m_next;
 

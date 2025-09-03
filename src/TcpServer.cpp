@@ -17,26 +17,26 @@ static EventLoop* checkLoopNotNull(EventLoop* loop) {
 TcpServer::TcpServer(
     EventLoop* loop, const InetAddress& listenAddr,
     const std::string& name, Option option)
-        : m_loop(checkLoopNotNull(loop))
-        , m_ipPort(listenAddr.toIpPort())
-        , m_name(name)
-        , m_acceptor(std::make_unique<Acceptor>(loop, listenAddr, option == Option::kReusePort))
-        , m_threadPool(std::make_shared<EventLoopThreadPool>(loop, name))
-        , m_connectionCallback()
-        , m_messageCallback()
-        , m_started(0)
-        , m_nextConnId(1) {
+        : loop_(checkLoopNotNull(loop))
+        , ipPort_(listenAddr.toIpPort())
+        , name_(name)
+        , acceptor_(std::make_unique<Acceptor>(loop, listenAddr, option == Option::kReusePort))
+        , threadPool_(std::make_shared<EventLoopThreadPool>(loop, name))
+        , connectionCallback_()
+        , messageCallback_()
+        , started_(0)
+        , nextConnId_(1) {
     
     // 构造
 
-    m_acceptor->setNewConnectionCallback(
+    acceptor_->setNewConnectionCallback(
         std::bind(&TcpServer::newConnection, this, std::placeholders::_1, std::placeholders::_2)
     );
 
 
 }
 TcpServer::~TcpServer() {
-    for(auto& item : m_connections) {
+    for(auto& item : connections_) {
         TcpConnectionPtr conn(item.second);
 
         item.second.reset(); // 让item.second不再指向资源, 只让conn指向资源
@@ -49,15 +49,15 @@ TcpServer::~TcpServer() {
 
 
 void TcpServer::setThreadNum(int numThreads) {
-    m_threadPool->setThreadNum(numThreads);
+    threadPool_->setThreadNum(numThreads);
 }
 
 void TcpServer::start() {
-    if(m_started ++ == 0) {
-        m_threadPool->start(m_threadInitCallback);
+    if(started_ ++ == 0) {
+        threadPool_->start(threadInitCallback_);
 
-        m_loop->runInLoop(
-            std::bind(&Acceptor::listen, m_acceptor.get())
+        loop_->runInLoop(
+            std::bind(&Acceptor::listen, acceptor_.get())
         );
     }
 }
@@ -66,10 +66,10 @@ void TcpServer::start() {
 
 void TcpServer::newConnection(int sockfd, const InetAddress& peerAddr) {
 
-    EventLoop* ioLoop = m_threadPool->getNextLoop();
+    EventLoop* ioLoop = threadPool_->getNextLoop();
 
-    std::string connName = m_ipPort + "#" + std::to_string(m_nextConnId);
-    ++ m_nextConnId;
+    std::string connName = ipPort_ + "#" + std::to_string(nextConnId_);
+    ++ nextConnId_;
 
     LOG_DEBUG("TcpServer::newConnection: {}", connName);
 
@@ -84,11 +84,11 @@ void TcpServer::newConnection(int sockfd, const InetAddress& peerAddr) {
 
     TcpConnectionPtr conn = std::make_shared<TcpConnection>(ioLoop, connName, sockfd, localAddr, peerAddr);
 
-    m_connections[connName] = conn;
+    connections_[connName] = conn;
 
-    conn->setConnectionCallback(m_connectionCallback);
-    conn->setMessageCallback(m_messageCallback);
-    conn->setWriteCompleteCallback(m_writeCompleteCallback);
+    conn->setConnectionCallback(connectionCallback_);
+    conn->setMessageCallback(messageCallback_);
+    conn->setWriteCompleteCallback(writeCompleteCallback_);
     conn->setCloseCallback(
         std::bind(&TcpServer::removeConnection, this, std::placeholders::_1)
     );
@@ -102,7 +102,7 @@ void TcpServer::newConnection(int sockfd, const InetAddress& peerAddr) {
 
 void TcpServer::removeConnection(const TcpConnectionPtr& conn) {
 
-    m_loop->runInLoop(
+    loop_->runInLoop(
         std::bind(&TcpServer::removeConnectionInLoop, this, conn)
     );
 
@@ -112,9 +112,9 @@ void TcpServer::removeConnectionInLoop(const TcpConnectionPtr& conn) {
 
     std::string connName = conn->name();
 
-    LOG_INFO("TcpServer::removeConnectionInLoop [{}] connection[{}]", m_name, connName);
+    LOG_INFO("TcpServer::removeConnectionInLoop [{}] connection[{}]", name_, connName);
 
-    m_connections.erase(connName);
+    connections_.erase(connName);
 
     EventLoop* ioLoop = conn->getLoop();
     ioLoop->queueInLoop(

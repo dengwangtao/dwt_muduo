@@ -24,7 +24,7 @@ static int createNonBlockingFd() {
 
 
 Acceptor::Acceptor(EventLoop* loop, const InetAddress& listenAddr, bool reusePort)
-    : m_loop(loop)
+    : loop_(loop)
     , m_acceptSocket(createNonBlockingFd())
     , m_acceptChannel(loop, m_acceptSocket.fd())
     , m_listening(false) {

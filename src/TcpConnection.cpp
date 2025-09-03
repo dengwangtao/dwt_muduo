@@ -13,7 +13,7 @@ namespace dwt{
 
 static EventLoop* checkLoopNotNull(EventLoop* loop) {
     if(loop == nullptr) {
-        LOG_FATAL("{} {} {} TcpConnection Loop is nullptr", __FILE__, __FUNCTION__, __LINE__);
+        LOG_FATAL("TcpConnection Loop is nullptr");
     }
     return loop;
 }
@@ -26,8 +26,8 @@ TcpConnection::TcpConnection(
         EventLoop* loop, const std::string& name, int sockfd,
         const InetAddress& localAddr, const InetAddress& peerAddr)
 
-    : m_loop(checkLoopNotNull(loop))
-    , m_name(name)
+    : loop_(checkLoopNotNull(loop))
+    , name_(name)
     , m_state(StateE::kConnecting)
     , m_reading(true)
     , m_socket(std::make_unique<Socket>(sockfd))
@@ -53,23 +53,23 @@ TcpConnection::TcpConnection(
         std::bind(&TcpConnection::handleError, this)
     );
 
-    LOG_INFO("TcpConnection::ctor[{}] at fd = {}", m_name, sockfd);
+    LOG_INFO("TcpConnection::ctor[{}] at fd = {}", name_, sockfd);
 
     m_socket->setKeepAlive(true);
 }
     
 TcpConnection::~TcpConnection() {
-    LOG_INFO("TcpConnection::dtor[{}] at fd = {} state = {}", m_name, m_channel->fd(), (int)m_state.load());
+    LOG_INFO("TcpConnection::dtor[{}] at fd = {} state = {}", name_, m_channel->fd(), (int)m_state.load());
 }
 
 
 
 void TcpConnection::send(const void* message, size_t len) {
     if(m_state == StateE::kConnected) {
-        if(m_loop->isInLoopThread()) {
+        if(loop_->isInLoopThread()) {
             sendInLoop(message, len);
         } else {
-            m_loop->runInLoop(
+            loop_->runInLoop(
                 std::bind(&TcpConnection::sendInLoop, this, message, len)
             );
         }
@@ -100,9 +100,9 @@ void TcpConnection::sendInLoop(const void* message, size_t len) {
         if(nwrote >= 0) {
             remaining = len - nwrote;
 
-            if(remaining == 0 && m_writeCompleteCallback) {
-                m_loop->queueInLoop(
-                    std::bind(m_writeCompleteCallback, this->shared_from_this())
+            if(remaining == 0 && writeCompleteCallback_) {
+                loop_->queueInLoop(
+                    std::bind(writeCompleteCallback_, this->shared_from_this())
                 );
             }
 
@@ -127,7 +127,7 @@ void TcpConnection::sendInLoop(const void* message, size_t len) {
         size_t oldLen = m_outputBuffer.readableBytes();
 
         if(oldLen + remaining >= m_highWaterMark && oldLen < m_highWaterMark && m_highWaterMarkCallback) { // 超过高水位
-            m_loop->queueInLoop(
+            loop_->queueInLoop(
                 std::bind(m_highWaterMarkCallback, this->shared_from_this(), oldLen + remaining)
             );
         }
@@ -148,7 +148,7 @@ void TcpConnection::shutdown() {
         setState(StateE::kDisconnecting);
 
 
-        m_loop->runInLoop(
+        loop_->runInLoop(
             std::bind(&TcpConnection::shutdownInLoop, this)
         );
     }
@@ -166,7 +166,7 @@ void TcpConnection::connectEstablished() {
     m_channel->tie(shared_from_this()); // channel 的 weekptr 监视当前的 TcpConnection
     m_channel->enableReading();
 
-    m_connectionCallback(shared_from_this());
+    connectionCallback_(shared_from_this());
 }
 
 void TcpConnection::connectDestoryed() {
@@ -177,7 +177,7 @@ void TcpConnection::connectDestoryed() {
         LOG_INFO("TcpConnection::connectDestoryed fd = {} state = {}", m_channel->fd(), (int)m_state.load());
 
         m_channel->disableAll();
-        m_connectionCallback(shared_from_this());
+        connectionCallback_(shared_from_this());
     }
     m_channel->remove();    
 }
@@ -193,7 +193,7 @@ void TcpConnection::handleRead(Timestamp receiceTime) {
 
     if(n > 0) {
         // 已连接的用户有数据到达
-        m_messageCallback(this->shared_from_this(), &m_inputBuffer, receiceTime);
+        messageCallback_(this->shared_from_this(), &m_inputBuffer, receiceTime);
     } else if(n == 0) {
 
         handleClose();
@@ -224,11 +224,11 @@ void TcpConnection::handleWrite() {
             if(m_outputBuffer.readableBytes() == 0) { // 全部发送完成
                 m_channel->disableWriting();
 
-                if(m_writeCompleteCallback) {
+                if(writeCompleteCallback_) {
 
                     // 放入函数, 并唤醒线程
-                    m_loop->queueInLoop(
-                        std::bind(m_writeCompleteCallback, this->shared_from_this())
+                    loop_->queueInLoop(
+                        std::bind(writeCompleteCallback_, this->shared_from_this())
                     );
 
                 }
@@ -258,7 +258,7 @@ void TcpConnection::handleClose() {
     m_channel->disableAll();
 
     TcpConnectionPtr guardThis(this->shared_from_this());
-    m_connectionCallback(guardThis);
+    connectionCallback_(guardThis);
     m_closeCallback(guardThis);
 }
 
@@ -273,7 +273,7 @@ void TcpConnection::handleError() {
         err = optval;
     }
 
-    LOG_ERROR("TcpConnection::handleError name={} SO_ERROR={}",m_name, err);
+    LOG_ERROR("TcpConnection::handleError name={} SO_ERROR={}",name_, err);
 
 }
 
