@@ -27,7 +27,7 @@ class EventLoop : noncopyable {
 public:
     using Functor = std::function<void()>;
 
-    EventLoop();
+    EventLoop(const std::string& name = {});
     ~EventLoop();
 
     void loop();    // 开启事件循环
@@ -55,6 +55,8 @@ public:
         return m_threadId == CurrentThread::tid();
     }
 
+    std::string name() const { return name_; }
+
 private:
 
     void handleRead();
@@ -81,6 +83,7 @@ private:
     std::atomic<bool> m_callingPendingFunctors; //标识当前loop是否有需要执行的回调操作
     std::vector<Functor> m_pendingFunctors; // 所有的回调操作
     std::mutex m_mutex;                     // 保证m_pendingFunctors线程安全
+    std::string name_; // 事件循环的名字
 };
 
 

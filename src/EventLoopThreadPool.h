@@ -30,8 +30,6 @@ public:
 
     EventLoop* getNextLoop();   // 轮询的方式给分channel给subloop
 
-    std::vector<EventLoop*> getAllLoops();
-
     bool started() const { return started_; }
 
     const std::string& name() const { return name_; }

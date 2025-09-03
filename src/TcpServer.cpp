@@ -67,8 +67,9 @@ void TcpServer::start() {
 void TcpServer::newConnection(int sockfd, const InetAddress& peerAddr) {
 
     EventLoop* ioLoop = threadPool_->getNextLoop();
+    LOG_INFO("newConnection getNextLoop is {}", ioLoop->name());
 
-    std::string connName = ipPort_ + "#" + std::to_string(nextConnId_);
+    std::string connName = fmt::format("{}#{}", ipPort_, nextConnId_);
     ++ nextConnId_;
 
     LOG_DEBUG("TcpServer::newConnection: {}", connName);

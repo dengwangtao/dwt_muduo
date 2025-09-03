@@ -9,7 +9,7 @@ namespace dwt {
 
 EventLoopThread::EventLoopThread(const ThreadInitCallback& cb, const std::string& name)
     : loop_(nullptr)
-    , m_exiting(false)
+    , exiting_(false)
     , m_thread(std::bind(&EventLoopThread::threadFunc, this), name)
     , threadInitCallback_(cb)
     , m_mutex()
@@ -20,7 +20,7 @@ EventLoopThread::EventLoopThread(const ThreadInitCallback& cb, const std::string
 
 EventLoopThread::~EventLoopThread() {
 
-    m_exiting = true;
+    exiting_ = true;
     if(loop_) {
         loop_->quit();
 
@@ -75,17 +75,17 @@ void EventLoopThread::threadFunc() {
 EventLoopThread::EventLoopThread(const ThreadInitCallback& cb, const std::string& name)
     : dwt::Thread(std::bind(&EventLoopThread::threadFunc, this), name)
     , loop_(nullptr)
-    , m_exiting(false)
+    , exiting_(false)
     , threadInitCallback_(cb)
     , m_mutex()
-    , m_loop_created_promise() {
+    , loop_created_promise_() {
     
     // 构造
 }
 
 EventLoopThread::~EventLoopThread() {
 
-    m_exiting = true;
+    exiting_ = true;
     if(loop_) {
         loop_->quit();
 
@@ -96,7 +96,7 @@ EventLoopThread::~EventLoopThread() {
 
 EventLoop* EventLoopThread::startLoop() {
 
-    std::future<void> future = m_loop_created_promise.get_future();
+    std::future<void> future = loop_created_promise_.get_future();
 
     this->start();   // 启动新线程, 执行EventLoopThread::threadFunc()函数
     // threadFunc会创建loop，下面的代码要等待loop创建完毕才能返回
@@ -113,7 +113,7 @@ EventLoop* EventLoopThread::startLoop() {
 
 void EventLoopThread::threadFunc() {
 
-    EventLoop loop; // 创建一个独立的loop
+    EventLoop loop(fmt::format("eventloop_from_{}", name())); // 创建一个独立的loop
     // loop是在该线程栈上创建的
 
     LOG_TRACE("EventLoopThread::threadFunc() {} loop_ creating", name_);
@@ -124,7 +124,7 @@ void EventLoopThread::threadFunc() {
     }
 
     loop_ = &loop;
-    m_loop_created_promise.set_value();   // 通知, loop创建完毕
+    loop_created_promise_.set_value();   // 通知, loop创建完毕
 
     loop.loop();    // 开启事件循环 loop_->loop();
         
