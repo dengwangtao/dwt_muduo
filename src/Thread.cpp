@@ -61,8 +61,8 @@ void Thread::join() {
 
 void Thread::setDefaultName() {
   int num = ++m_numCreated;
-  if (m_name.empty()) {
-    m_name = fmt::format("Thread-{}", num);
+  if (name_.empty()) {
+    name_ = fmt::format("Thread-{}", num);
   }
 }
 
