@@ -1,7 +1,7 @@
 #include "Timestamp.h"
 
 #include <chrono>
-#include <format>
+#include "fmt/format.h"
 
 namespace dwt{
 
@@ -37,8 +37,8 @@ std::string Timestamp::toString() const
     std::time_t time = system_clock::to_time_t(tp);
     std::tm* tm_time = std::localtime(&time);
 
-    // 使用 std::format (C++20)
-    return std::format("{:04}/{:02}/{:02} {:02}:{:02}:{:02}",
+    // 使用 fmt::format (C++20)
+    return fmt::format("{:04}/{:02}/{:02} {:02}:{:02}:{:02}",
                         tm_time->tm_year + 1900, tm_time->tm_mon + 1, tm_time->tm_mday,
                         tm_time->tm_hour, tm_time->tm_min, tm_time->tm_sec);
 }

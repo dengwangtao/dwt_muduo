@@ -19,7 +19,7 @@
 #ifdef SPDLOG_USE_STD_FORMAT
     #include <version>
     #if __cpp_lib_format >= 202207L
-        #include <format>
+        #include "fmt/format.h"
     #else
         #include <string_view>
     #endif
@@ -70,7 +70,7 @@
     #define SPDLOG_CONSTEXPR constexpr
 #endif
 
-// If building with std::format, can just use constexpr, otherwise if building with fmt
+// If building with fmt::format, can just use constexpr, otherwise if building with fmt
 // SPDLOG_CONSTEXPR_FUNC needs to be set the same as FMT_CONSTEXPR to avoid situations where
 // a constexpr function in spdlog could end up calling a non-constexpr function in fmt
 // depending on the compiler
@@ -150,7 +150,7 @@ using memory_buf_t = std::string;
 
 template <typename... Args>
     #if __cpp_lib_format >= 202207L
-using format_string_t = std::format_string<Args...>;
+using format_string_t = fmt::format_string<Args...>;
     #else
 using format_string_t = std::string_view;
     #endif
@@ -171,7 +171,7 @@ using wformat_string_t = std::wstring_view;
         #endif
     #endif
     #define SPDLOG_BUF_TO_STRING(x) x
-#else  // use fmt lib instead of std::format
+#else  // use fmt lib instead of fmt::format
 namespace fmt_lib = fmt;
 
 using string_view_t = fmt::basic_string_view<char>;

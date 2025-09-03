@@ -11,8 +11,8 @@
 //
 #include <spdlog/tweakme.h>
 
-#if defined(SPDLOG_USE_STD_FORMAT)  // SPDLOG_USE_STD_FORMAT is defined - use std::format
-    #include <format>
+#if defined(SPDLOG_USE_STD_FORMAT)  // SPDLOG_USE_STD_FORMAT is defined - use fmt::format
+    #include "fmt/format.h"
 #elif !defined(SPDLOG_FMT_EXTERNAL)
     #if !defined(SPDLOG_COMPILED_LIB) && !defined(FMT_HEADER_ONLY)
         #define FMT_HEADER_ONLY

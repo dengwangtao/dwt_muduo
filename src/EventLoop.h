@@ -6,7 +6,7 @@
 #include <atomic>
 #include <memory>
 #include <mutex>
-#include <format>
+#include "fmt/format.h"
 
 #include "CurrentThread.h"
 #include "Timestamp.h"

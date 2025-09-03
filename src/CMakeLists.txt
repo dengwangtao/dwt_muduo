@@ -13,10 +13,24 @@ set(TARGET dwt_muduo)
 add_library(${TARGET} STATIC ${SRC_LIST})
 
 
+
+set(FMT_DIR ${CMAKE_SOURCE_DIR}/thirdparty/fmt)
+
+
+
 # target_link_libraries(${TARGET} pthread)
 
 # 这行让其他目录能通过 `#include "hello/xxx.h"` 访问
 target_include_directories(${TARGET} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${FMT_DIR}/include
+)
+
+target_link_directories(${TARGET} PUBLIC
+    ${FMT_DIR}/lib
+)
+
+target_link_libraries(${TARGET} PUBLIC
+    fmt
 )

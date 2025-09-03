@@ -1,6 +1,6 @@
 #include "InetAddress.h"
 #include <string.h>
-#include <format>
+#include "fmt/format.h"
 
 namespace dwt{
 
@@ -37,7 +37,7 @@ uint16_t InetAddress::toPort() const
 }
 std::string InetAddress::toIpPort() const
 {
-    return std::format("{}:{}", toIp(), toPort());
+    return fmt::format("{}:{}", toIp(), toPort());
 }
 
 const struct sockaddr_in* InetAddress::getSockAddr() const

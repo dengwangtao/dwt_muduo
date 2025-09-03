@@ -2,7 +2,7 @@
 
 #include <semaphore.h>
 
-#include <format>
+#include "fmt/format.h"
 #include <future>
 #include "Logger.h"
 
@@ -62,7 +62,7 @@ void Thread::join() {
 void Thread::setDefaultName() {
   int num = ++m_numCreated;
   if (m_name.empty()) {
-    m_name = std::format("Thread-{}", num);
+    m_name = fmt::format("Thread-{}", num);
   }
 }
 
